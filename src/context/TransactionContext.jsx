@@ -1,0 +1,115 @@
+import { useState, useCallback, useContext, createContext, useEffect, useMemo, useRef } from "react";
+
+
+const TransactionContext  = createContext()
+
+
+export const TransactionProvider = ({children})=>{
+ const selectRef = useRef()
+    //Memos
+ const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric'
+}),[new Date()])
+
+    //States
+ const [chooseType,setChooseType]  = useState(false)
+ const [transaction, setTransaction] = useState({description: "", amount: '', type: "Expense", category: '' ,date: day})
+ const [transactionArr, setTransactionArr] = useState([])
+ const [totalIncome,setTotalIncome] = useState(null)
+ const [totalExpense,setTotalExpense] = useState(null)
+ const [recurringBills,setRecurringBills] = useState(0)
+ const [largestCategory,setLargestCategory] = useState('')
+ const [activeLink,setActiveLink] = useState({'overview':true,'transactions':false,'reports':false})
+ const [isPanelOpen,setIsPanelOpen] = useState(false) 
+ const [prevCategory,setPrevCategory] = useState(null)
+
+  //Functions
+ const handleTypeClick =(e)=>{
+     setTransaction(prev=>({...prev,['type']:e.target.dataset.name}))
+     if(e.target.dataset.name == 'Expense'){
+      setChooseType(false)
+     }else{
+      setChooseType(true)
+     }
+ }
+ const handleAmt =(e)=>  setTransaction(prev=>({...prev,['amount']:e.target.value}))
+ const selectCategory = (e)=>  setTransaction(prev=>({...prev,['category']:e.target.value}))
+ const handleDesc =  (e)=>  setTransaction(prev=>({...prev,['description']:e.target.value}))
+ const addTransaction = useCallback(() => {
+  const newObj = { ...transaction };
+  let valid = true;
+  
+  Object.entries(newObj).forEach(([key, val]) => {
+    if (val === '') {
+      valid = false;
+      selectRef.current.focus()
+      return
+    }
+  });
+  
+  if (valid) {
+    setPrevCategory(prev => transaction['type']  == 'Expense' && transaction['category'])
+    setTransactionArr(prev => [...prev, transaction]);
+    setTransaction(prev => ({
+      ...prev, 
+      category:"",
+      description: "", 
+      amount: "", 
+      date: day
+    }));
+    selectRef.current.selectedIndex = 0
+  }
+}, [transaction, day]);
+
+    //useEffect
+    useEffect(()=>{
+        setTotalIncome(transactionArr.filter(item =>item['type'] == 'Income').reduce((acc,curr)=> acc +  parseInt(curr['amount']),0))
+        setTotalExpense(transactionArr.filter(item =>item['type'] == 'Expense').reduce((acc,curr)=> acc + parseInt(curr['amount']),0))  
+        setLargestCategory(()=>{
+        let maxFreq = 0
+        let category = ''
+        let obj = {}
+         transactionArr.filter(item =>item['type'] == 'Expense').map(item=>{
+            obj[item['category']] = (obj[item['category']]||0) + 1
+        })
+        Object.entries(obj).forEach(([key,val])=>{
+            if(val > 1 && val > maxFreq){
+            maxFreq = val
+            category = key
+            }
+        })
+         return (category||'nil')
+        })  
+
+        setRecurringBills(()=>{
+        let maxFreq = 0
+        let amount = ''
+        let obj = {}
+         transactionArr.filter(item =>item['type'] == 'Expense').map(item=>{
+            obj[item['amount']] = (obj[item['amount']]||0) + 1
+        })
+        Object.entries(obj).forEach(([key,val])=>{
+            if(val > 1 && val > maxFreq){
+            maxFreq = val
+            amount = key
+            }
+        })
+         return (amount||0)
+        })  
+
+        },[transactionArr])
+
+
+    return(
+        <TransactionContext.Provider value={{
+        transaction,chooseType,handleTypeClick,handleAmt,selectCategory,
+        handleDesc,addTransaction,transactionArr,totalIncome,
+        totalExpense,largestCategory,recurringBills,activeLink,
+        setActiveLink,isPanelOpen,setIsPanelOpen,selectRef,prevCategory}}>
+            {children}
+        </TransactionContext.Provider>
+    )
+}
+
+export const useTransaction =  ()=>useContext(TransactionContext)
