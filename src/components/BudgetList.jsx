@@ -30,14 +30,14 @@ const handleDelete = (category)=>{
 
     return ( 
     <div className="mb-2">
-    <div className="max-w-5xl justify-between items-center mx-auto p-3 rounded-tl-lg rounded-tr-lg bg-gray-300  mt-8 flex" id="overview">
+    <div className="max-w-5xl justify-between items-center mx-auto p-3 rounded-tl-lg rounded-tr-lg bg-gray-300  mt-8 flex">
     <span className="text-gray-800 font-semibold md:flex-10">Category</span>
     <span className="text-gray-800 font-semibold md:flex-8">Amount</span>
     <span className="text-gray-800 font-semibold md:flex-3">Actions</span>
     </div>  
     {budgetArr.length > 0 &&
         budgetArr.map((list,i)=>(
-            <div key={i} className="max-w-5xl justify-between items-center mx-auto p-3 bg-white border-b-2 border-gray-300 flex" id="overview">
+            <div key={i} className="max-w-5xl justify-between items-center mx-auto p-3 bg-white border-b-2 border-gray-300 flex">
             <span className="text-gray-800 font-semibold flex-1 ml-3">{list['category']}</span>
             {editFlag[i]
             ?<input type="number" autoFocus={true} className="bg-slate-100  p-1 pl-3 rounded-lg w-30 flex-1 outline-none border border-gray-400" placeholder="$" onChange={(e)=>handleBudgetChange(e,list['category'])}/>
