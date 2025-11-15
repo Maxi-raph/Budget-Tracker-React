@@ -17,7 +17,6 @@ export const Panel  = ()=>{
         <div 
         className={isPanelOpen?`fixed top-0 right-0 left-0 bottom-0 bg-black/60 z-10 md:hidden`:'hidden'} onClick={(e)=>panelClose(e)}
         ></div>
-        <FiMenu className={`text-gray-800 text-2xl bg-gray-300/90 rounded-sm  cursor-pointer fixed left-3 top-17 lg:hidden md:hidden ${isPanelOpen?'hidden':'block'}` } onClick={()=>setIsPanelOpen(true)}/>
         <div  className={`w-64 fixed top-17 left-0 min-h-screen z-50 bg-white  border-r border-r-gray-300 p-3 lg:top-0 md:top-0  sm:top-17 lg:block md:block transition duration-800 md:translate-x-0 ${isPanelOpen?'translate-x-0':'-translate-x-full'}`}>
                 <FiX className='text-gray-800 text-2xl cursor-pointer absolute right-1 top-4  lg:hidden md:hidden  sm:block' onClick={()=>setIsPanelOpen(!isPanelOpen)}/>
             <div className='flex space-x-2 items-center mb-4'>
