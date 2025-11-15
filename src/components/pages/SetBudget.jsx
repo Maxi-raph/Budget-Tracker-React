@@ -22,7 +22,6 @@ const SetBudget = () => {
 
     const addCategory = ()=>{
         const categoryExists = budgetArr.some(item=>item['category'] == budgetDetails['category'])
-        if(!categoryExists)categorySelectRef.current.focus()
         if (categoryExists) {
             setWarning(true)
         }
