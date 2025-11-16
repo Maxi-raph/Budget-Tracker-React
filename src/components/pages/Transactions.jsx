@@ -22,7 +22,7 @@ const Transactions = () => {
     },[])
 
 
-   return ( <div className=" max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg scroll-mt-22" id="transactions">
+   return ( <div className=" max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg" id="transactions">
         <h2  className="font-semibold text-lg mb-4">Transactions</h2>
         <div className="flex flex-col-reverse gap-6 lg:flex-row lg:items-start sm:flex-col-reverse sm:items-center">
             <TransactionList />

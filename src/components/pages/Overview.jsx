@@ -47,7 +47,7 @@ const Overview = () => {
     },[])
     
 
-    return ( <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg scroll-mt-22" id="overview">
+    return ( <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg " id="overview">
      <h2 className="font-semibold text-lg mb-4">Dashboard Overview</h2>    
      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mb-6">
         <div className="rounded-md bg-gray-200 p-3 shadow-lg">
