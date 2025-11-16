@@ -4,7 +4,7 @@ import { Panel } from './components/Panel';
 import NavBar from "./components/NavBar";
 
 const App = () => {
-  return ( <div className=' min-h-screen w-screen '>
+  return ( <div className=' w-full'>
     <Panel />
     <NavBar />
     <BudgetDashboard />

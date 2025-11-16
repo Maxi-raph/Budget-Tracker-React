@@ -5,7 +5,7 @@ import SetBudget from "./pages/SetBudget";
 import { Routes, Route } from "react-router";
 
 const BudgetDashboard = () => {
-    return ( <div className="flex-1 pt-24 w-full pr-4 pl-4 md:pl-72 md:pr-10 bg-red-300">  
+    return ( <div className="flex-1 pt-24 w-full pr-4 pl-4 pb-4 md:pl-72 md:pr-10">  
         <Routes>
             <Route path="/" element={<Overview />} />
             <Route path="/set_budget" element={<SetBudget />} />
