@@ -108,13 +108,27 @@ export const TransactionProvider = ({children})=>{
 
         },[transactionArr])
 
+      useEffect(() => {
+      const handleEnter = (e) => { 
+        if (e.key === 'Enter') {
+          const { description, amount, category, type } = transaction;
+          if (description && amount && category && type) {
+            addTransaction(e);
+          }
+        } 
+      }
+
+      window.addEventListener('keydown', handleEnter);
+      return () => window.removeEventListener('keydown', handleEnter);
+    }, [addTransaction]); 
+
 
     return(
         <TransactionContext.Provider value={{
         transaction,chooseType,handleTypeClick,handleAmt,selectCategory,
         handleDesc,addTransaction,transactionArr,setTransactionArr,totalIncome,
         totalExpense,largestCategory,recurringBills,activeLink,
-        setActiveLink,isPanelOpen,setIsPanelOpen,prevCategory}}>
+        setActiveLink,isPanelOpen,setIsPanelOpen,prevCategory,setPrevCategory}}>
             {children}
         </TransactionContext.Provider>
     )

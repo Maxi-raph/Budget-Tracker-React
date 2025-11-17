@@ -6,7 +6,7 @@ import {Link, useNavigate} from 'react-router'
 
 
 const Overview = () => {
-    const{totalIncome,totalExpense,largestCategory,recurringBills,prevCategory,transactionArr} = useTransaction()
+    const{totalIncome,totalExpense,largestCategory,recurringBills,transactionArr,prevCategory,setPrevCategory} = useTransaction()
     const {budgetArr} = useBudget()
     const [limitWidth,setLimitWidth] = useState(0)
     const [isAwake,setIsAwake] = useState(false)
@@ -16,7 +16,7 @@ const Overview = () => {
    
     const monitorExpenses =()=>{
        
-    console.log(expense);
+     console.log(prevCategory);
     
      
     }
@@ -33,7 +33,7 @@ const Overview = () => {
     }
        return 0 
      })
-    },[expense])
+    },[expense,transactionArr])
 
     useEffect(()=>{
       const handleVisibility = ()=>{
