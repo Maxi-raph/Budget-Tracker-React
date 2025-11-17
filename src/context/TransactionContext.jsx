@@ -5,7 +5,6 @@ const TransactionContext  = createContext()
 
 
 export const TransactionProvider = ({children})=>{
- const selectRef = useRef()
     //Memos
  const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
   month: 'short',
@@ -26,7 +25,16 @@ export const TransactionProvider = ({children})=>{
 
   //Functions
  const handleTypeClick =(e)=>{
-     setTransaction(prev=>({...prev,['type']:e.target.dataset.name}))
+    setTransaction(prev => ({
+      ...prev, 
+      category:"",
+      type: e.target.dataset.name,
+      description: "", 
+      amount: "", 
+      date: day
+    }));
+ 
+
      if(e.target.dataset.name == 'Expense'){
       setChooseType(false)
      }else{
@@ -36,14 +44,14 @@ export const TransactionProvider = ({children})=>{
  const handleAmt =(e)=>  setTransaction(prev=>({...prev,['amount']:e.target.value}))
  const selectCategory = (e)=>  setTransaction(prev=>({...prev,['category']:e.target.value}))
  const handleDesc =  (e)=>  setTransaction(prev=>({...prev,['description']:e.target.value}))
- const addTransaction = useCallback(() => {
+ const addTransaction = useCallback((e) => {
+  e.preventDefault()
   const newObj = { ...transaction };
   let valid = true;
   
   Object.entries(newObj).forEach(([key, val]) => {
     if (val === '') {
       valid = false;
-      selectRef.current.focus()
       return
     }
   });
@@ -58,7 +66,7 @@ export const TransactionProvider = ({children})=>{
       amount: "", 
       date: day
     }));
-    selectRef.current.selectedIndex = 0
+ 
   }
 }, [transaction, day]);
 
@@ -79,7 +87,7 @@ export const TransactionProvider = ({children})=>{
             category = key
             }
         })
-         return (category||'nil')
+         return (category||'—')
         })  
 
         setRecurringBills(()=>{
@@ -104,9 +112,9 @@ export const TransactionProvider = ({children})=>{
     return(
         <TransactionContext.Provider value={{
         transaction,chooseType,handleTypeClick,handleAmt,selectCategory,
-        handleDesc,addTransaction,transactionArr,totalIncome,
+        handleDesc,addTransaction,transactionArr,setTransactionArr,totalIncome,
         totalExpense,largestCategory,recurringBills,activeLink,
-        setActiveLink,isPanelOpen,setIsPanelOpen,selectRef,prevCategory}}>
+        setActiveLink,isPanelOpen,setIsPanelOpen,prevCategory}}>
             {children}
         </TransactionContext.Provider>
     )
