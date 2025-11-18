@@ -2,11 +2,13 @@ import {FaPlus} from 'react-icons/fa'
 import { useTransaction } from '../../context/TransactionContext';
 import TransactionList from '../TransactionList';
 import { useState, useEffect } from 'react';
+import { useBudget } from '../../context/BudgetContext';
 
 const Transactions = () => {
    const {
     transaction,chooseType,handleTypeClick,handleAmt,
-    selectCategory,handleDesc,addTransaction} = useTransaction()
+    selectCategory,handleDesc,addTransaction,transactionArr} = useTransaction()
+    const {budgetArr,setExceededBudgetCount} = useBudget()
    
     const [isAwake,setIsAwake] = useState(false)
 
@@ -21,6 +23,17 @@ const Transactions = () => {
       return ()=>  document.removeEventListener('visibilitychange',handleVisibility)  
     },[])
 
+    useEffect(()=>{
+        if (budgetArr.length > 0) {
+            let count = null
+            budgetArr.forEach(budget =>{
+            let expenses =  transactionArr.filter(item => item.category === budget.category).reduce((acc,curr) => acc + Number(curr.amount),0)
+            if(expenses > budget['amount']) count++
+            })
+            setExceededBudgetCount(count)
+        }
+        
+    },[transactionArr,budgetArr])
 
    return ( <div className=" max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg" id="transactions">
         <h2  className="font-semibold text-lg mb-4">Transactions</h2>

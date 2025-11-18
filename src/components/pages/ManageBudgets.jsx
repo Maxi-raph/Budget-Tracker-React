@@ -1,10 +1,10 @@
 import { useState,useEffect } from "react"
-import { useBudget } from "../context/BudgetContext"
-import { useTransaction } from "../context/TransactionContext"
+import { useBudget } from "../../context/BudgetContext"
+import { useTransaction } from "../../context/TransactionContext"
 
 const ManageBudgets = ()=>{
   const {budgetArr} = useBudget()
-  const {transactionArr} = useTransaction()
+  const {transactionArr,prevCategory} = useTransaction()
   const [isAwake,setIsAwake] = useState(false)
 
  useEffect(()=>{
@@ -18,19 +18,18 @@ const ManageBudgets = ()=>{
     return ()=>  document.removeEventListener('visibilitychange',handleVisibility)  
  },[])
 
-  const getExpense = (amount,category)=>{
+  const getExpense = (category)=>{
     if (transactionArr.length > 0) {
         const expenseArr = transactionArr.filter(item => item['type'] == 'Expense') 
         if(expenseArr.filter(item=>item['category'] === category)){
         let expense = expenseArr.filter(item=>item['category'] === category).reduce((acc,curr)=>acc + Number(curr['amount']),0)
-        
         return expense
         }        
     }
     return 0
   }
 
-  const getLimit = (amount,category,expense)=>{
+  const getLimitWidth = (amount,category,expense)=>{
        if(amount > 0 && category){ 
         let percent = Number(amount/100)
        if( Number(expense/percent) > 100){
@@ -48,10 +47,10 @@ const ManageBudgets = ()=>{
         <div className={`bg-white p-4 w-full rounded-lg shadow-lg ${budgetArr.length > 0?' grid grid-cols-1 md:grid-cols-2 gap-6':''}`}>
             {budgetArr.length > 0 
             ? budgetArr.map((item,i) =>{
-                const expense = getExpense(item['amount'],item['category']);
-                const limitWidth = getLimit(item['amount'],item['category'], expense);
-            return   ( <div key={i} className="rounded-md bg-gray-200 p-3 shadow-lg">
-                    <p className="text-gray-600 mb-4 font-semibold">Budget For {item['category']}</p>
+                const expense = getExpense(item['category']);
+                const limitWidth = getLimitWidth(item['amount'],item['category'], expense);
+            return   ( <div key={i} className={`rounded-md p-3 shadow-lg ${prevCategory == item['category']?'bg-indigo-300':'bg-gray-200'}`}>
+                    <p className={`mb-4 font-semibold ${prevCategory == item['category']?'text-white':'text-gray-600'}`}>Budget For {item['category']}</p>
                     <span className="font-bold text-xl">${Number(item['amount']).toLocaleString()}</span>
                     <span className="block text-md font-bold mt-3">Used Amount: ${expense.toLocaleString()}</span>
                     <div className="mt-3 max-w-52 h-3 bg-white rounded-lg">

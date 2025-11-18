@@ -2,7 +2,7 @@ import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import Transactions from './pages/Transactions';
 import SetBudget from "./pages/SetBudget";
-import ManageBudgets from "./ManageBudgets";
+import ManageBudgets from "./pages/ManageBudgets";
 import Settings from "./pages/Settings";
 import { Routes, Route } from "react-router";
 
