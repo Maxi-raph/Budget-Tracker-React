@@ -4,7 +4,7 @@ import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
 
 
 const TransactionList = () => {
-     const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
+    const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric'
     }),[new Date()])
@@ -40,15 +40,12 @@ const TransactionList = () => {
             setIsModalOpen(prev => prev = false)
     },[updatedTransaction])
 
-    const handleDelete = useCallback((e)=>{
+    const handleDelete = (e)=>{
         e.preventDefault()
-
-        
-        let newArr = transactionArr.filter((item,i) => i !== index)
-        setTransactionArr(prev => newArr)
+        setTransactionArr(prev => prev.filter((item,i) => i !== index))
         setUpdatedTransaction({description: "", amount: '', type:'', category: '' ,date: ''})
         setIsModalOpen(false)
-      },[transactionArr])
+      }
 
     const handleAmountEdit = (e)=>{
         setUpdatedTransaction(prev =>({...prev, amount:e.target.value}))
