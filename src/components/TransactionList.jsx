@@ -1,20 +1,19 @@
 import { useState,useMemo, useEffect, useCallback } from "react";
 import { useTransaction } from "../context/TransactionContext";
-import { FaEdit, FaSave } from "react-icons/fa";
+import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
 
 
 const TransactionList = () => {
-    const {prevCategory,setPrevCategory} = useTransaction()
      const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric'
     }),[new Date()])
-    const {transactionArr,setTransactionArr} = useTransaction()
+    const {transactionArr,setTransactionArr,prevCategory,setPrevCategory} = useTransaction()
     const [editFlag,setEditFlag] = useState()
     const [index,setIndex] = useState(null)
     const [transactionType,setTransactionType] = useState('')
     const [isModalOpen,setIsModalOpen] = useState(false)
-    const [updatedTransaction,setUpdatedTransaction] = useState({description: "", amount: '', type: useMemo(()=>transactionType,[transactionType]), category: '' ,date: day})
+    const [updatedTransaction,setUpdatedTransaction] = useState({description: "", amount: '', type:'', category: '' ,date: ''})
    
     const openModal = (i,type)=>{
      setIsModalOpen(true)
@@ -40,6 +39,16 @@ const TransactionList = () => {
             setIndex(null)
             setIsModalOpen(prev => prev = false)
     },[updatedTransaction])
+
+    const handleDelete = useCallback((e)=>{
+        e.preventDefault()
+
+        
+        let newArr = transactionArr.filter((item,i) => i !== index)
+        setTransactionArr(prev => newArr)
+        setUpdatedTransaction({description: "", amount: '', type:'', category: '' ,date: ''})
+        setIsModalOpen(false)
+      },[transactionArr])
 
     const handleAmountEdit = (e)=>{
         setUpdatedTransaction(prev =>({...prev, amount:e.target.value}))
@@ -108,9 +117,12 @@ const TransactionList = () => {
                             <textarea required className="w-full p-3 font-bold outline-gray-100 bg-white rounded-lg placeholder:text-gray-400" placeholder="Groceries..." maxLength={13}  value={updatedTransaction['description']} onChange={(e)=>handleDescEdit(e)}/>
                         </div>  
                       </div>
-                        <div className="flex justify-end mt-4">
+                        <div className="flex justify-end mt-4 gap-3">
                             <button type='submit' className="px-3 py-2 cursor-pointer flex justify-center gap-2 items-center bg-blue-600 text-white rounded-lg">
                             <FaSave /> Save
+                            </button>
+                            <button className="px-3 py-2 cursor-pointer flex justify-center gap-2 items-center bg-red-600 text-white rounded-lg" onClick={(e)=>handleDelete(e)}>
+                            <FaTrash /> Delete
                             </button>
                         </div>
                     </form>
