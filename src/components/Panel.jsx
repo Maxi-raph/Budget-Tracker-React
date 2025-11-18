@@ -23,9 +23,11 @@ export const Panel  = ()=>{
                 <FaWallet className='text-gray-800 text-md sm:text-xl'/> 
                 <header className="text-xl font-semibold">Budget Tracker</header>
             </div>
-            <NavLinks name={'Dashboard'} icon={<FaTachometerAlt className=' text-md'/>} id={'overview'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
+            <NavLinks name={'Dashboard'} icon={<FaTachometerAlt className=' text-md'/>} id={'dashboard'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
             <NavLinks name={'Transactions'} icon={<FaExchangeAlt className=' text-md'/>} id={'transactions'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
             <NavLinks name={'Reports'} icon={<FaChartLine className=' text-md'/>} id={'reports'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
+            <NavLinks name={'Settings'} icon={<FaCog  className="text-md"/>} id={'settings'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>              
+
             <div className='bg-gray-200 rounded-lg p-2 mt-6 shadow-lg block'>
                 <h2 className='text-gray-600 font-medium mb-3'>Quick Totals</h2>
                 <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3">

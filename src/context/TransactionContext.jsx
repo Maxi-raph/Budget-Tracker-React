@@ -19,7 +19,7 @@ export const TransactionProvider = ({children})=>{
  const [totalExpense,setTotalExpense] = useState(null)
  const [recurringBills,setRecurringBills] = useState(0)
  const [largestCategory,setLargestCategory] = useState('')
- const [activeLink,setActiveLink] = useState({'overview':true,'transactions':false,'reports':false})
+ const [activeLink,setActiveLink] = useState({'dashboard':true,'transactions':false,'reports':false})
  const [isPanelOpen,setIsPanelOpen] = useState(false) 
  const [prevCategory,setPrevCategory] = useState(null)
 
@@ -107,21 +107,6 @@ export const TransactionProvider = ({children})=>{
         })  
 
         },[transactionArr])
-
-      useEffect(() => {
-      const handleEnter = (e) => { 
-        if (e.key === 'Enter') {
-          const { description, amount, category, type } = transaction;
-          if (description && amount && category && type) {
-            addTransaction(e);
-          }
-        } 
-      }
-
-      window.addEventListener('keydown', handleEnter);
-      return () => window.removeEventListener('keydown', handleEnter);
-    }, [addTransaction]); 
-
 
     return(
         <TransactionContext.Provider value={{

@@ -5,16 +5,13 @@ const BudgetContext  = createContext()
 
 
 export const BudgetProvider = ({children})=>{
-    //Memos
- const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
-  month: 'short',
-  day: 'numeric'
-}),[new Date()])
 
     //States
  const [budget,setBudget] = useState('')
  const [budgetExists,setBudgetExists] = useState(false)
  const [budgetArr,setBudgetArr] = useState([])
+ const [exceededBudgetCount,setExceededBudgetCount] = useState(null)
+
 
     //useRef
     const budgetRef = useRef(null)
@@ -22,7 +19,7 @@ export const BudgetProvider = ({children})=>{
 
 
     return(
-        <BudgetContext.Provider value={{budget,budgetRef,budgetExists,setBudget,budgetExists,setBudgetExists,budgetArr,setBudgetArr}}>
+        <BudgetContext.Provider value={{budget,budgetRef,budgetExists,setBudget,budgetExists,setBudgetExists,budgetArr,setBudgetArr,exceededBudgetCount,setExceededBudgetCount}}>
             {children}
         </BudgetContext.Provider>
     )

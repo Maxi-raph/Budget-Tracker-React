@@ -5,21 +5,15 @@ import {Link, useNavigate} from 'react-router'
 
 
 
-const Overview = () => {
+const Dashboard = () => {
     const{totalIncome,totalExpense,largestCategory,recurringBills,transactionArr,prevCategory,setPrevCategory} = useTransaction()
-    const {budgetArr} = useBudget()
+    const {budgetArr,setExceededBudgetCount} = useBudget()
     const [limitWidth,setLimitWidth] = useState(0)
     const [isAwake,setIsAwake] = useState(false)
 
-   const expense=   useMemo(()=>transactionArr.filter(item=>item['type'] == 'Expense').filter(item=>item['category'] == prevCategory).reduce((acc,curr) =>acc + parseInt(curr['amount']), 0),[])
-   const budgetCategory= useMemo(()=>budgetArr.filter(item=>item['category'] == prevCategory),[])
+   const expense =   useMemo(()=>transactionArr.filter(item=>item['type'] == 'Expense').filter(item=>item['category'] == prevCategory).reduce((acc,curr) =>acc + parseInt(curr['amount']), 0),[prevCategory])
+   const budgetCategory= useMemo(()=>budgetArr.filter(item=>item['category'] == prevCategory),[prevCategory])
    
-    const monitorExpenses =()=>{
-       
-     console.log(prevCategory);
-    
-     
-    }
 
     useEffect(()=>{
      setLimitWidth(() =>{
@@ -33,6 +27,7 @@ const Overview = () => {
     }
        return 0 
      })
+  
     },[expense,transactionArr])
 
     useEffect(()=>{
@@ -47,7 +42,7 @@ const Overview = () => {
     },[])
     
 
-    return ( <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg " id="overview">
+    return ( <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg " id="dashboard">
      <h2 className="font-semibold text-lg mb-4">Dashboard Overview</h2>    
      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mb-6">
         <div className="rounded-md bg-gray-200 p-3 shadow-lg">
@@ -79,10 +74,10 @@ const Overview = () => {
             <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{largestCategory}</span>
         </div>
      </div>
-     <div className="flex justify-center items-center rounded-md p-4 bg-gray-200 h-54 shadow-lg  text-gray-500" onClick={monitorExpenses}>
+     <div className="flex justify-center items-center rounded-md p-4 bg-gray-200 h-54 shadow-lg  text-gray-500">
         No Cash Flow Yet...
      </div>
     </div> );
 }
  
-export default Overview;
+export default Dashboard;
