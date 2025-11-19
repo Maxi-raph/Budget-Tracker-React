@@ -42,7 +42,6 @@ const ManageBudgets = ()=>{
   }
 
   
-  
     return(
         <div className={`bg-white p-4 w-full rounded-lg shadow-lg ${budgetArr.length > 0?' grid grid-cols-1 md:grid-cols-2 gap-6':''}`}>
             {budgetArr.length > 0 

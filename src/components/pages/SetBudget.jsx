@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import {FaPlus, FaInfo} from 'react-icons/fa'
 import BudgetList from '../BudgetList';
 import { useBudget } from '../../context/BudgetContext';
+import { useTransaction}from '../../context/TransactionContext';
 
 
 const SetBudget = () => {
-    const {budgetArr,setBudgetArr} = useBudget()
+    const {budgetArr,setBudgetArr,setExceededBudgetCount} = useBudget()
+    const {transactionArr} = useTransaction()
     const [budgetDetails,setBudgetDetails] = useState({category:'',amount:''})
     const [warning,setWarning] = useState(false)
     const [isAwake,setIsAwake] = useState(false)
@@ -44,6 +46,18 @@ const SetBudget = () => {
       document.addEventListener('visibilitychange',handleVisibility)  
       return ()=>  document.removeEventListener('visibilitychange',handleVisibility)  
     },[])
+
+    useEffect(()=>{
+        if (budgetArr.length > 0) {
+            let count = null
+            budgetArr.forEach(budget =>{
+            let expenses =  transactionArr.filter(item => item.category === budget.category).reduce((acc,curr) => acc + Number(curr.amount),0)
+            if(expenses > budget['amount']) count++
+            })
+            setExceededBudgetCount(count)
+        }
+        
+    },[transactionArr,budgetArr])
 
     return (    
     <>
