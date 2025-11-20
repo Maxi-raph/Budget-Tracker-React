@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { FaTrash, FaEdit, FaSave } from "react-icons/fa";
 import { useBudget } from "../context/BudgetContext";
+import { useTransaction } from "../context/TransactionContext";
 
 const BudgetList = ({setWarning}) => {
 //useContext
-const {budgetArr,setBudgetArr} = useBudget() 
+const {transactionArr} = useTransaction()
+const {budgetArr,setBudgetArr,setExceededBudgetCount} = useBudget() 
 // useState
 const [editFlag,setEditFlag] = useState({0:false, 1:false,2:false,3:false,4:false})
 
 //Functions
-const handleBudgetChange = (e,category)=>{
-    const budgetCategoryToEdit = budgetArr.filter(item => item['category'] == category)
-    budgetCategoryToEdit[0]['amount'] = e.target.value
+const handleBudgetChange = (e,index)=>{
+    const budgetCategoryToEdit = budgetArr[index]
+    budgetCategoryToEdit['amount'] = e.target.value
 }
 
 const handleEdit =(i)=>{
@@ -20,6 +22,16 @@ const handleEdit =(i)=>{
 
 const handleSave =(i)=>{
      setEditFlag(prev=>({...prev, [i]:false}))
+        if (budgetArr.length > 0) {
+            let count = null
+            budgetArr.forEach(budget =>{
+            let expenses =  transactionArr.filter(item => item.category === budget.category).reduce((acc,curr) => acc + Number(curr.amount),0)
+            if(expenses > budget['amount']) count++
+            })
+            setExceededBudgetCount(count)
+        }else if (budgetArr.length === 0) {
+              setExceededBudgetCount(null)          
+        }
 }
 const handleDelete = (category)=>{
      let newArr = [...budgetArr]
@@ -27,6 +39,12 @@ const handleDelete = (category)=>{
     setBudgetArr(prev=>prev = newArr)
     setWarning(false)
 }
+
+    useEffect(()=>{
+
+        console.log(budgetArr,transactionArr);
+        
+    },[transactionArr,budgetArr])
 
     return ( 
     <div className="mb-2">
@@ -40,7 +58,7 @@ const handleDelete = (category)=>{
             <div key={i} className="max-w-5xl justify-between items-center mx-auto p-3 bg-white border-b-2 border-gray-300 flex">
             <span className="text-gray-800 font-semibold flex-1 ml-3">{list['category']}</span>
             {editFlag[i]
-            ?<input type="number" autoFocus={true} className="bg-slate-100  p-1 pl-3 rounded-lg w-30 flex-1 outline-none border border-gray-400" placeholder="$" onChange={(e)=>handleBudgetChange(e,list['category'])}/>
+            ?<input type="number" autoFocus={true} className="bg-slate-100  p-1 pl-3 rounded-lg w-30 flex-1 outline-none border border-gray-400" placeholder="$0" onChange={(e)=>handleBudgetChange(e,i)}/>
             :<span className="text-gray-800 font-semibold flex-1 text-center min-w-0 wrap-break-word">${Number(list['amount']).toLocaleString()}</span>
             }
             <div className="text-gray-800 font-semibold flex-1 justify-end gap-2 flex">

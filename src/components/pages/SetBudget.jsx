@@ -55,6 +55,8 @@ const SetBudget = () => {
             if(expenses > budget['amount']) count++
             })
             setExceededBudgetCount(count)
+        }else if (budgetArr.length === 0) {
+              setExceededBudgetCount(null)          
         }
         
     },[transactionArr,budgetArr])

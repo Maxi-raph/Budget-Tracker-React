@@ -17,7 +17,7 @@ const NavBar = () => {
             <img src="" alt="" className="bg-cover rounded-full p-3 bg-black"/>
             <Link to={'/manage_budget'} className="relative">
              <FaPiggyBank className="text-2xl"/>
-                {exceededBudgetCount > 0 && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center">{exceededBudgetCount}</span>}
+                {exceededBudgetCount && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center">{exceededBudgetCount}</span>}
             </Link>
         </div>
     </div> );
