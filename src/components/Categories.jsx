@@ -79,9 +79,7 @@ borderColor: [
           weight: '600',            
           style: 'normal'           
         },
-        padding: 20,             
-        usePointStyle: true,        
-        pointStyle: 'circle'        
+        padding: 10      
       }
     },
       title: {
@@ -109,7 +107,7 @@ borderColor: [
               ? <div className="w-full h-full">
                 <Bar data={data} options={options} />
                 </div>
-              :' Add transactions to see spending by category...'}
+              :' Add transactions to view category chart...'}
             </div>
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">

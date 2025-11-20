@@ -1,4 +1,4 @@
-import { FaSearch, FaPiggyBank } from "react-icons/fa";
+import { FaSearch, FaPiggyBank, FaMoneyBillWave, FaChartPie } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { useBudget } from "../context/BudgetContext";
 import { useTransaction } from "../context/TransactionContext";
@@ -16,7 +16,7 @@ const NavBar = () => {
         <div className="flex space-x-4 items-center mr-6 cursor-pointer">
             <img src="" alt="" className="bg-cover rounded-full p-3 bg-black"/>
             <Link to={'/manage_budget'} className="relative">
-             <FaPiggyBank className="text-2xl"/>
+             <FaChartPie className="text-2xl"/>
                 {exceededBudgetCount && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center">{exceededBudgetCount}</span>}
             </Link>
         </div>
