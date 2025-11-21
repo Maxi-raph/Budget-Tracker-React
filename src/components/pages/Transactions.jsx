@@ -103,7 +103,7 @@ const Transactions = () => {
                     </div>
                     <div>
                         <span className="text-gray-400 mb-3 block font-semibold text">Description  <span className="inline-block text-red-400 font-semibold">*</span></span>
-                        <textarea required className="w-full p-3 font-bold outline-gray-100 bg-white rounded-lg placeholder:text-gray-400" placeholder="Groceries..." maxLength={13} value={transaction['description']}  onChange={(e)=>handleDesc(e)}/>
+                        <textarea required className="w-full p-3 font-bold outline-gray-100 bg-white rounded-lg placeholder:text-gray-400" placeholder="Groceries..." maxLength={20} value={transaction['description']}  onChange={(e)=>handleDesc(e)}/>
                     </div>  
                 </div>
                 <button  type='submit' className="w-full p-2 bg-gray-900 text-white cursor-pointer  rounded-lg shadow-lg mt-4 flex justify-center items-center gap-2"><FaPlus />Add {chooseType?'Income':'Expense'}</button>

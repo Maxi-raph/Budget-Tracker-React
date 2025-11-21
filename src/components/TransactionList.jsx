@@ -2,6 +2,9 @@ import { useState,useMemo, useEffect, useCallback } from "react";
 import { useTransaction } from "../context/TransactionContext";
 import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
 import { format } from "date-fns";
+import {DatePicker} from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
+import "../datepicker.css";
 
 
 const TransactionList = () => {
@@ -95,7 +98,24 @@ const TransactionList = () => {
                           <div className="grid sm:grid-cols-2 gap-3">
                         <div>
                             <span className="text-black mb-2 block font-semibold text">Date</span>
-                            <span className="block p-3 font-bold bg-white rounded-lg">{day}</span>
+                            <div>
+                                <input type="hidden" value={updatedTransaction.date || ""} required />
+                               <DatePicker
+                                required className="w-full p-3 font-bold bg-white rounded-lg placeholder:text-gray-400"
+                                placeholderText='Select Date'
+                                dateFormat="MMM dd, yyyy"
+                                popperClassName="!px-4 !py-2"
+                                wrapperClassName="w-full"
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
+                                showPopperArrow={false}
+                                monthDropdownItemClassName="hover:bg-blue-500 hover:text-white px-3 py-1 rounded"
+                                yearDropdownItemClassName="hover:bg-blue-500 hover:text-white px-3 py-1 rounded"
+                                selected={updatedTransaction['date']}
+                                onChange={(date)=>setUpdatedTransaction(prev =>({...prev, ['date']:date}))}
+                                />
+                            </div>
                         </div>
                         <div>
                             <span className="text-black mb-2 block font-semibold text">Amount</span>
