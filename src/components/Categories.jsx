@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useTransaction } from "../context/TransactionContext";
 import { Doughnut, Bar, Line, Pie, PolarArea, Radar } from 'react-chartjs-2';
 import {
@@ -39,6 +39,24 @@ const Categories = () => {
     const utilities = useMemo(()=>transactionArr.filter(item => item['category'] === 'Utilities').reduce((acc,curr)=>acc + Number(curr['amount']),0) ,[transactionArr])
     const transport = useMemo(()=>transactionArr.filter(item => item['category'] === 'Transport').reduce((acc,curr)=>acc + Number(curr['amount']),0) ,[transactionArr])
     const health = useMemo(()=>transactionArr.filter(item => item['category'] === 'Health').reduce((acc,curr)=>acc + Number(curr['amount']),0) ,[transactionArr])
+    
+
+ 
+    const formatAmount = useCallback((value)=>{
+          if (value >= 1000) {
+           return `$${(value/1000).toFixed(0)}K`
+          }else if (value >= 1000000) {
+           return `$${(value/1000000).toFixed(0)}M`
+          }else if (value >= 1000000000) {
+           return `$${(value/1000000000).toFixed(0)}B`
+          }else if (value >= 1000000000000) {
+           return `$${(value/1000000000000).toFixed(0)}T`
+          } 
+         return `$${value}`
+
+   },[transactionArr])
+
+
     
 
     const data = {
@@ -91,10 +109,40 @@ borderColor: [
     x: {
       grid: {
         display: false
+      },
+      ticks:{
+        color: 'black',
+        font:{
+          family:  "'Inter', sans-serif",
+          size: 12,
+          weight: '500'
+        },
+       
+
       }
     },
     y: {
-      beginAtZero: true
+      beginAtZero: true,
+      ticks:{
+        color: 'black',
+        font:{
+          family:  "'Inter', sans-serif",
+          size: 12,
+          weight: '500'
+        },
+        callback: (value)=>{
+          if (value >= 1000) {
+            return `$${(value/1000).toFixed(0)}K`
+          }else if (value >= 1000000) {
+            return `$${(value/1000000).toFixed(0)}M`
+          }else if (value >= 1000000000) {
+            return `$${(value/1000000000).toFixed(0)}B`
+          }else if (value >= 1000000000000) {
+            return `$${(value/1000000000000).toFixed(0)}T`
+          } 
+          return `$${value}`
+        }
+      }
     }
   }
   };
@@ -102,7 +150,7 @@ borderColor: [
     return( 
     <>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="flex justify-center items-center  rounded-md p-1 bg-gray-200 h-72 shadow-xl  text-gray-500 bg-gradient-to-br from-cyan-50 to-blue-400 border border-blue-200 backdrop-blur-sm">
+            <div className="flex justify-center items-center  rounded-md p-1 bg-gray-200 h-72 shadow-xl  text-gray-500 bg-linear-to-br from-cyan-50 to-blue-400 border border-blue-200 backdrop-blur-sm">
               {transactionArr.filter(item => item.type == 'Expense').length > 0 
               ? <div className="w-full h-full">
                 <Bar data={data} options={options} />
@@ -112,23 +160,23 @@ borderColor: [
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
                     <span className="font-semibold">Rent</span>
-                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">${rent}</span>
+                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{formatAmount(rent)}</span>
                 </div>
                 <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
                     <span className="font-semibold">Food</span>
-                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">${food}</span>
+                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{formatAmount(food)}</span>
                 </div>
                 <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
                     <span className="font-semibold">Utilities</span>
-                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">${utilities}</span>
+                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{formatAmount(utilities)}</span>
                 </div>
                 <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
                     <span className="font-semibold">Transport</span>
-                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">${transport}</span>
+                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{formatAmount(transport)}</span>
                 </div>
                 <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
                     <span className="font-semibold">Health</span>
-                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">${health}</span>
+                     <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{formatAmount(health)}</span>
                 </div>
             </div>
         </div>

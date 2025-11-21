@@ -11,7 +11,7 @@ const NavBar = () => {
         <FiMenu className={`text-gray-800 text-4xl  rounded-sm cursor-pointer  lg:hidden md:hidden ${isPanelOpen?'hidden':'block'}` } onClick={()=>setIsPanelOpen(true)}/>
         <div className="relative w-full pl-2">
         <FaSearch className="absolute cursor-pointer top-3 left-5 text-gray-500"/>
-        <input type="text" placeholder="Search transactions, categories..." className="outline-none rounded-md text-gray-900 w-[70%]  p-2 pl-9 bg-white border border-gray-300 shadow-lg sm:w-[80%] md:w-[80%] lg:w-[60%]" />
+        <input type="text" placeholder="Search transactions, categories..." className="outline-none rounded-md text-gray-900  p-2 pl-9 bg-white border border-gray-300 shadow-lg text-sm sm:text-md w-[80%]" />
         </div>
         <div className="flex space-x-4 items-center mr-6 cursor-pointer">
             <img src="" alt="" className="bg-cover rounded-full p-3 bg-black"/>
