@@ -152,7 +152,7 @@ borderColor: [
     return( 
     <>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="flex justify-center items-center  rounded-md p-1 bg-gray-200 h-72 shadow-xl  text-gray-800 font-semibold bg-linear-to-br from-white/60 to-gray-400 border border-gray-200 backdrop-blur-xl">
+            <div className="flex justify-center items-center  rounded-md p-1 h-72 shadow-xl  text-gray-800 font-semibold bg-linear-to-br from-white/60 to-gray-300 border border-gray-200 backdrop-blur-xl">
               {transactionArr.filter(item => item.type == 'Expense').length > 0 
               ? <div className="w-full h-full">
                 <Bar data={data} options={options} />

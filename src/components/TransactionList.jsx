@@ -13,7 +13,6 @@ const TransactionList = () => {
       day: 'numeric'
     }),[new Date()])
     const {transactionArr,setTransactionArr,prevCategory,setPrevCategory} = useTransaction()
-    const [editFlag,setEditFlag] = useState()
     const [index,setIndex] = useState(null)
     const [transactionType,setTransactionType] = useState('')
     const [isModalOpen,setIsModalOpen] = useState(false)
@@ -79,16 +78,6 @@ const TransactionList = () => {
         return categoryColorObj[category]
     },[transactionArr])
 
-    useEffect(()=>{
-      const handleEnter = (e) => {            
-        if (e.key === 'Enter') {
-          handleSave(e);
-        } 
-      }
-
-      window.addEventListener('keydown', handleEnter);
-      return () => window.removeEventListener('keydown', handleEnter);
-    },[handleSave])
     
     return ( 
             <>

@@ -63,7 +63,7 @@ const Dashboard = () => {
             <span className={`text-red-600 mt-1 ${budgetCategory.length == 1 && budgetCategory[0]['amount'] < expense ? 'block' : 'hidden'}`}>Budget exceeded by ${budgetCategory.length == 1 && (expense -  Number(budgetCategory[0]['amount'])).toLocaleString()}</span>
         </div>    
      </div>
-      <Link to="/set_budget" className="mb-4 text-md font-semibold p-2 rounded-md w-[70%] mx-auto flex justify-center outline-none pl-3 bg-gray-900 cursor-pointer shadow-2xl text-lg text-white lg:w-[32%] lg:mx-0 ">Set Budget</Link>   
+      <Link to="/set_budget" className="mb-4 text-md font-semibold p-2 rounded-md w-[70%] mx-auto flex justify-center outline-none pl-3 bg-gray-900 cursor-pointer shadow-lg text-lg text-white lg:w-[32%] lg:mx-0 ">Set Budget</Link>   
      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
             <span className="font-semibold">Recurring Bills</span>
