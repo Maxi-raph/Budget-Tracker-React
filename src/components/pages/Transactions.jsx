@@ -3,10 +3,14 @@ import { useTransaction } from '../../context/TransactionContext';
 import TransactionList from '../TransactionList';
 import { useState, useEffect } from 'react';
 import { useBudget } from '../../context/BudgetContext';
+import {DatePicker} from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
+import "../../datepicker.css";
+
 
 const Transactions = () => {
    const {
-    transaction,chooseType,handleTypeClick,handleAmt,
+    transaction,setTransaction,chooseType,handleTypeClick,handleAmt,
     selectCategory,handleDesc,addTransaction,transactionArr} = useTransaction()
     const {budgetArr,setExceededBudgetCount} = useBudget()
    
@@ -52,8 +56,23 @@ const Transactions = () => {
                 <form onSubmit={(e)=>addTransaction(e)}>
                     <div className="grid sm:grid-cols-2 gap-4">
                     <div>
+                        <input type="hidden" value={transaction.date || ""} required />
                         <span className="text-gray-400 mb-3 block font-semibold text">Date  <span className="inline-block text-red-400 font-semibold">*</span></span>
-                        <span className="block p-3 font-bold bg-white rounded-lg">{new Date().toLocaleDateString('en-NG')}</span>
+                        <DatePicker
+                          required className="w-full p-3 font-bold bg-white rounded-lg placeholder:text-gray-400"
+                          placeholderText='Select Date'
+                          dateFormat="MMM dd, yyyy"
+                          popperClassName="!px-4 !py-2"
+                          wrapperClassName="w-full"
+                          showMonthDropdown
+                          showYearDropdown
+                          dropdownMode="select"
+                          showPopperArrow={false}
+                          monthDropdownItemClassName="hover:bg-blue-500 hover:text-white px-3 py-1 rounded"
+                         yearDropdownItemClassName="hover:bg-blue-500 hover:text-white px-3 py-1 rounded"
+                          selected={transaction['date']}
+                          onChange={(date)=>setTransaction(prev =>({...prev, ['date']:date}))}
+                        />
                     </div>
                     <div>
                         <span className="text-gray-400 mb-3 block font-semibold text">Amount  <span className="inline-block text-red-400 font-semibold">*</span></span>

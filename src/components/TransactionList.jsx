@@ -1,6 +1,7 @@
 import { useState,useMemo, useEffect, useCallback } from "react";
 import { useTransaction } from "../context/TransactionContext";
 import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
+import { format } from "date-fns";
 
 
 const TransactionList = () => {
@@ -89,9 +90,8 @@ const TransactionList = () => {
     return ( 
             <>
             <div className={`${isModalOpen ?'fixed inset-0 flex items-center justify-center z-20 bg-gray-900/80 ':'hidden'}`}>
-                <div className="bg-gray-400 rounded-2xl w-[90%] max-w-md p-6 shadow-xl animate-[fadeIn_0.2s_ease-out]">
+                <form onSubmit={(e)=>handleSave(e)} className="bg-gray-400 rounded-2xl w-[90%] max-w-md p-6 shadow-xl animate-[fadeIn_0.2s_ease-out]">
                     <h2 className="font-bold mb-6 text-center text-xl">Edit Transaction</h2>
-                    <form onSubmit={(e)=>handleSave(e)}>
                           <div className="grid sm:grid-cols-2 gap-3">
                         <div>
                             <span className="text-black mb-2 block font-semibold text">Date</span>
@@ -138,8 +138,7 @@ const TransactionList = () => {
                             <FaTrash /> Delete
                             </button>
                         </div>
-                    </form>
-                </div>
+                </form>
             </div>
             <div className="bg-gray-200 rounded-lg shadow-lg lg:w-[60%] sm:w-full">
                 <div className="flex justify-around items-center w-full py-2">
@@ -151,7 +150,7 @@ const TransactionList = () => {
                 </div>
                 {transactionArr.length > 0 && transactionArr.map((item,i) =>
                 (<div key={i} className="flex justify-around items-center  w-full bg-white py-3 border-b-2 border-b-gray-200">
-                    <span className="text-gray-600 text-sm sm:text-sm font-semibold flex-2 text-center">{item['date']}</span>
+                    <span className="text-gray-600 text-sm sm:text-sm font-semibold flex-2 text-center">{format(item['date'], "MMM dd")}</span>
                     <span className="text-gray-600 text-sm sm:text-sm hidden sm:block font-semibold  flex-4 text-center  min-w-0 wrap-break-word leading-relaxed">{item['description']}</span>
                     <span style={{backgroundColor:categoryColor(item['category'])}} className={`p-1 rounded-lg text-white text-sm sm:text-sm block font-semibold  flex-2 text-center`}>{item['category']}</span>
                     <span className={`text-gray-600 text-sm sm:text-sm font-bold  flex-3 text-center  min-w-0 wrap-break-word ${item['type'] == 'Expense'?'text-red-500':'text-green-500'}`}>{item['type'] == 'Expense'?'-':'+'}${Number(item['amount']).toLocaleString()}</span>

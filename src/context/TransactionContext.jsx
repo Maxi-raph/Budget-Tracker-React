@@ -1,19 +1,14 @@
-import { useState, useCallback, useContext, createContext, useEffect, useMemo, useRef } from "react";
+import { useState, useCallback, useContext, createContext, useEffect, useMemo } from "react";
 
 
 const TransactionContext  = createContext()
 
 
 export const TransactionProvider = ({children})=>{
-    //Memos
- const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
-  month: 'short',
-  day: 'numeric'
-}),[new Date()])
 
     //States
  const [chooseType,setChooseType]  = useState(false)
- const [transaction, setTransaction] = useState({description: "", amount: '', type: "Expense", category: '' ,date: day})
+ const [transaction, setTransaction] = useState({description: "", amount: '', type: "Expense", category: '' ,date: ''})
  const [transactionArr, setTransactionArr] = useState([])
  const [totalIncome,setTotalIncome] = useState(null)
  const [totalExpense,setTotalExpense] = useState(null)
@@ -30,8 +25,8 @@ export const TransactionProvider = ({children})=>{
       category:"",
       type: e.target.dataset.name,
       description: "", 
-      amount: "", 
-      date: day
+      amount: "",
+      date: ''
     }));
  
 
@@ -50,12 +45,13 @@ export const TransactionProvider = ({children})=>{
   let valid = true;
   
   Object.entries(newObj).forEach(([key, val]) => {
-    if (val === '') {
-      valid = false;
-      return
-    }
+    if (key !== 'date' && val === '') valid = false;
   });
   
+    if (!newObj.date || isNaN(newObj.date.getTime())) valid = false
+
+   if (!valid) return
+
   if (valid) {
     setPrevCategory(prev => transaction['type']  == 'Expense' && transaction['category'])
     setTransactionArr(prev => [...prev, transaction]);
@@ -63,12 +59,12 @@ export const TransactionProvider = ({children})=>{
       ...prev, 
       category:"",
       description: "", 
-      amount: "", 
-      date: day
+      amount: "",
+      date: ''
     }));
  
   }
-}, [transaction, day]);
+}, [transaction]);
 
     //useEffect
     useEffect(()=>{
@@ -110,7 +106,7 @@ export const TransactionProvider = ({children})=>{
 
     return(
         <TransactionContext.Provider value={{
-        transaction,chooseType,handleTypeClick,handleAmt,selectCategory,
+        transaction,setTransaction,chooseType,handleTypeClick,handleAmt,selectCategory,
         handleDesc,addTransaction,transactionArr,setTransactionArr,totalIncome,
         totalExpense,largestCategory,recurringBills,activeLink,
         setActiveLink,isPanelOpen,setIsPanelOpen,prevCategory,setPrevCategory}}>
