@@ -9,19 +9,25 @@ const {transactionArr} = useTransaction()
 const {budgetArr,setBudgetArr,setExceededBudgetCount} = useBudget() 
 // useState
 const [editFlag,setEditFlag] = useState({0:false, 1:false,2:false,3:false,4:false})
+const [categoryToEditValue,setCategoryToEditValue] = useState('')
 
 //Functions
 const handleBudgetChange = (e,index)=>{
-    const budgetCategoryToEdit = budgetArr[index]
-    budgetCategoryToEdit['amount'] = e.target.value
+    setCategoryToEditValue(prev =>{
+        prev = e.target.value
+        budgetArr[index]['amount'] = prev
+    }) 
+    
 }
 
 const handleEdit =(i)=>{
     setEditFlag(prev=>({...prev, [i]:true}))
+    setCategoryToEditValue(budgetArr[i]['amount'])
 }
 
 const handleSave =(i)=>{
      setEditFlag(prev=>({...prev, [i]:false}))
+     setCategoryToEditValue('')
         if (budgetArr.length > 0) {
             let count = null
             budgetArr.forEach(budget =>{
@@ -40,11 +46,6 @@ const handleDelete = (category)=>{
     setWarning(false)
 }
 
-    useEffect(()=>{
-
-        console.log(budgetArr,transactionArr);
-        
-    },[transactionArr,budgetArr])
 
     return ( 
     <div className="mb-2">
@@ -58,7 +59,7 @@ const handleDelete = (category)=>{
             <div key={i} className="max-w-5xl justify-between items-center mx-auto p-3 bg-white border-b-2 border-gray-300 flex">
             <span className="text-gray-800 font-semibold flex-1 ml-3">{list['category']}</span>
             {editFlag[i]
-            ?<input type="number" autoFocus={true} className="bg-slate-100  p-1 pl-3 rounded-lg w-30 flex-1 outline-none border border-gray-400" placeholder="$0" onChange={(e)=>handleBudgetChange(e,i)}/>
+            ?<input type="number" autoFocus={true} className="bg-slate-100  p-1 pl-3 rounded-lg w-30 flex-1 outline-none border border-gray-400" placeholder="$0" value={categoryToEditValue} onChange={(e)=>handleBudgetChange(e,i)}/>
             :<span className="text-gray-800 font-semibold flex-1 text-center min-w-0 wrap-break-word">${Number(list['amount']).toLocaleString()}</span>
             }
             <div className="text-gray-800 font-semibold flex-1 justify-end gap-2 flex">

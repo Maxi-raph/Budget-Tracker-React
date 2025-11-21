@@ -1,21 +1,36 @@
 import {FaWallet, FaTachometerAlt, FaExchangeAlt, FaChartLine, FaCog} from 'react-icons/fa'
 import { FiMenu, FiX } from "react-icons/fi";
 import NavLinks from './NavLinks'
-import { useEffect } from 'react';
+import { useEffect,useCallback } from 'react';
 import { useTransaction } from '../context/TransactionContext';
 
 export const Panel  = ()=>{
 
-  const{totalIncome,totalExpense,activeLink,setActiveLink,isPanelOpen,setIsPanelOpen} = useTransaction()
+  const{transactionArr,totalIncome,totalExpense,activeLink,setActiveLink,isPanelOpen,setIsPanelOpen} = useTransaction()
     const panelClose = (e)=>{
         if(!isPanelOpen)return
         setIsPanelOpen(false)
-    }   
+    } 
+    
+    const formatAmount = useCallback((value)=>{
+          if (value >= 1000000000000) {
+           return `$${(value/1000000000000).toFixed(1)}T`
+          }else if (value >= 1000000000) {
+           return `$${(value/1000000000).toFixed(1)}B`
+          }else if (value >= 1000000) {
+           return `$${(value/1000000).toFixed(1)}M`
+          }
+          else if (value >= 1000) {
+           return `$${(value/1000).toFixed(1)}K`
+          } 
+         return `$${value}`
+
+   },[transactionArr])
 
     return(
         <div>
         <div 
-        className={isPanelOpen?`fixed top-0 right-0 left-0 bottom-0 bg-black/60 z-10 md:hidden`:'hidden'} onClick={(e)=>panelClose(e)}
+        className={isPanelOpen?`fixed z-30 top-0 right-0 left-0 bottom-0 bg-black/60 md:hidden`:'hidden'} onClick={(e)=>panelClose(e)}
         ></div>
         <div  className={`w-64 fixed top-17 left-0 min-h-screen z-50 bg-white  border-r border-r-gray-300 p-3 lg:top-0 md:top-0  sm:top-17 lg:block md:block transition duration-800 md:translate-x-0 ${isPanelOpen?'translate-x-0':'-translate-x-full'}`}>
                 <FiX className='text-gray-800 text-2xl cursor-pointer absolute right-1 top-4  lg:hidden md:hidden  sm:block' onClick={()=>setIsPanelOpen(!isPanelOpen)}/>
@@ -32,15 +47,15 @@ export const Panel  = ()=>{
                 <h2 className='text-gray-600 font-medium mb-3'>Quick Totals</h2>
                 <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3">
                     <span className='text-gray-600'>Income</span>
-                    <span className='font-semibold text-green-500'>${Number(totalIncome).toLocaleString()}</span>
+                    <span className='font-semibold text-green-500'>{formatAmount(Number(totalIncome))}</span>
                 </div>
                 <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3">
                     <span className='text-gray-600'>Expenses</span>
-                    <span className='font-semibold text-red-500'>${Number(totalExpense).toLocaleString()}</span>
+                    <span className='font-semibold text-red-500'>{formatAmount(Number(totalExpense))}</span>
                 </div>
                 <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3">
                     <span className='text-gray-600'>Balance</span>
-                    <span className='font-semibold'>{totalIncome - totalExpense < 0 ? `-$${Math.abs(totalIncome - totalExpense).toLocaleString()}`:`$${(totalIncome - totalExpense).toLocaleString()}`}</span>
+                    <span className='font-semibold'>{totalIncome - totalExpense < 0 ? `-${formatAmount(Math.abs(totalIncome - totalExpense))}`:`${formatAmount((totalIncome - totalExpense))}`}</span>
                 </div>
             </div>
             <div className="flex flex-col items-center w-full  mt-[100%] gap-4  sm:hidden ">

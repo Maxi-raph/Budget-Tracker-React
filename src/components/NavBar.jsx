@@ -7,7 +7,7 @@ import { Link } from "react-router";
 const NavBar = () => {
     const {exceededBudgetCount} = useBudget()
     const {isPanelOpen,setIsPanelOpen} = useTransaction()
-    return ( <div className="flex justify-between gap-3 shadow-sm items-center p-3  w-full fixed z-999 top-0 left-0 sm:pl-0 md:pl-64 lg:pl-64 bg-gray-100/30 backdrop-blur-xs">
+    return ( <div className="flex justify-between gap-3 shadow-sm items-center p-3  w-full fixed z-20 top-0 left-0 sm:pl-0 md:pl-64 lg:pl-64 bg-gray-100/30 backdrop-blur-xs">
         <FiMenu className={`text-gray-800 text-4xl  rounded-sm cursor-pointer  lg:hidden md:hidden ${isPanelOpen?'hidden':'block'}` } onClick={()=>setIsPanelOpen(true)}/>
         <div className="relative w-full pl-2">
         <FaSearch className="absolute cursor-pointer top-3 left-5 text-gray-500"/>
