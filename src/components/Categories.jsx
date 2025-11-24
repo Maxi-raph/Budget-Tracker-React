@@ -157,7 +157,7 @@ borderColor: [
               ? <div className="w-full h-full">
                 <Bar data={data} options={options} />
                 </div>
-              :' Add transactions to view category chart...'}
+              :' Add transactions to view categories chart...'}
             </div>
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">

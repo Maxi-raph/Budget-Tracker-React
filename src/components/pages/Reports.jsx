@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Categories from '../Categories'
+import CashFlow from "../CashFlow";
+
 
 const Reports = () => {
     const [isAwake,setIsAwake] = useState(false)
@@ -30,6 +32,7 @@ const Reports = () => {
             <span data-name='trends' className={`block py-1 w-24  text-sm text-center border border-gray-300 cursor-pointer rounded-tr-md rounded-br-md font-semibold ${activeTab['trends'] ? 'bg-white':'bg-gray-200'}`} onClick={(e)=>handleTabChange(e)}>Trends</span>
         </div>
         {activeTab['categories'] && <Categories/>}
+        {activeTab['cashFlow'] && <CashFlow/>} 
     
     </div> );
 }
