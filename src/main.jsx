@@ -6,15 +6,19 @@ import { BrowserRouter } from 'react-router'
 import { TransactionProvider } from './context/TransactionContext.jsx'
 import { BudgetProvider } from './context/BudgetContext.jsx'
 import { CashFlowProvider } from './context/CashFlowContext.jsx'
+import { ThemeProvider } from './context/ThemeContext.jsx'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
   <TransactionProvider>
   <BudgetProvider>
   <CashFlowProvider>
+  <ThemeProvider>
   <BrowserRouter>
      <App />   
-  </BrowserRouter>    
+  </BrowserRouter>     
+  </ThemeProvider>
   </CashFlowProvider>
   </BudgetProvider>
   </TransactionProvider>
