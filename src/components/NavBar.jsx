@@ -20,7 +20,7 @@ const NavBar = () => {
             <button onClick={toggleTheme} className='cursor-pointer'>
               {
               theme === 'light'             
-                ? <HiOutlineSun className="text-2xl text-yellow-500" />
+                ? <HiOutlineSun className="text-3xl text-yellow-500" />
                 : <HiOutlineMoon className="text-2xl text-gray-500 dark:text-white" />
               }
             </button>
