@@ -43,13 +43,13 @@ const ManageBudgets = ()=>{
 
   
     return(
-        <div className={`bg-white p-4 w-full rounded-lg shadow-lg ${budgetArr.length > 0?' grid grid-cols-1 md:grid-cols-2 gap-6':''}`}>
+        <div className={`bg-white dark:bg-gray-700 p-4 w-full rounded-lg shadow-lg ${budgetArr.length > 0?' grid grid-cols-1 md:grid-cols-2 gap-6':''}`}>
             {budgetArr.length > 0 
             ? budgetArr.map((item,i) =>{
                 const expense = getExpense(item['category']);
                 const limitWidth = getLimitWidth(item['amount'],item['category'], expense);
-            return   ( <div key={i} className={`rounded-md p-3 shadow-lg ${prevCategory == item['category']?'bg-indigo-300':'bg-gray-200'}`}>
-                    <p className={`mb-4 font-semibold ${prevCategory == item['category']?'text-white':'text-gray-600'}`}>Budget For {item['category']}</p>
+            return   ( <div key={i} className={`rounded-md dark:bg-gray-600 p-3 shadow-lg ${prevCategory == item['category']?'bg-indigo-300':'bg-gray-200'}`}>
+                    <p className={`mb-4 font-semibold ${prevCategory == item['category']?'text-white':'text-gray-600 dark:text-white'}`}>Budget For {item['category']}</p>
                     <span className="font-bold text-xl">${Number(item['amount']).toLocaleString()}</span>
                     <span className="block text-md font-bold mt-3">Used Amount: ${expense.toLocaleString()}</span>
                     <div className="mt-3 max-w-52 h-3 bg-white rounded-lg">

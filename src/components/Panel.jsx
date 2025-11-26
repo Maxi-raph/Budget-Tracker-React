@@ -46,14 +46,14 @@ export const Panel  = ()=>{
             <div className='bg-gray-200 rounded-lg p-2 mt-6 shadow-lg block dark:bg-gray-800'>
                 <h2 className='text-gray-600 font-medium mb-3 dark:text-white'>Quick Totals</h2>
                 <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3 dark:bg-gray-600">
-                    <span className='text-gray-600 dark:text-white dark:text-white'>Income</span>
+                    <span className='text-gray-600 dark:text-white'>Income</span>
                     <span className='font-semibold text-green-500'>{formatAmount(Number(totalIncome))}</span>
                 </div>
-                <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3 mb-3 dark:bg-gray-600">
+                <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3 dark:bg-gray-600">
                     <span className='text-gray-600 dark:text-white'>Expenses</span>
                     <span className='font-semibold text-red-500'>{formatAmount(Number(totalExpense))}</span>
                 </div>
-                <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3 mb-3 dark:bg-gray-600">
+                <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white mb-3 dark:bg-gray-600">
                     <span className='text-gray-600 dark:text-white'>Balance</span>
                     <span className='font-semibold'>{totalIncome - totalExpense < 0 ? `-${formatAmount(Math.abs(totalIncome - totalExpense))}`:`${formatAmount((totalIncome - totalExpense))}`}</span>
                 </div>

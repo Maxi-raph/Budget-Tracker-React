@@ -43,19 +43,19 @@ const Dashboard = () => {
     },[])
     
 
-    return ( <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg " id="dashboard">
+    return ( <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white dark:bg-gray-700 shadow-lg " id="dashboard">
      <h2 className="font-semibold text-lg mb-4">Dashboard Overview</h2>    
      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mb-6">
-        <div className="rounded-md bg-gray-200 p-3 shadow-lg">
-            <p className="text-gray-600 mb-4 font-semibold">Total Income</p>
+        <div className="rounded-md bg-gray-200 dark:bg-gray-600 p-3 shadow-lg">
+            <p className="text-gray-600 dark:text-white mb-4 font-semibold">Total Income</p>
             <span className="font-bold text-xl text-green-500">${totalIncome?.toLocaleString()}</span>
         </div>
-        <div className="rounded-md bg-gray-200 p-3 shadow-lg">
-            <p className="text-gray-600 mb-4 font-semibold">Total Expenses</p>
+        <div className="rounded-md bg-gray-200 dark:bg-gray-600 p-3 shadow-lg">
+            <p className="text-gray-600 dark:text-white mb-4 font-semibold">Total Expenses</p>
             <span className="font-bold text-xl text-red-500">${totalExpense?.toLocaleString()}</span>
         </div>
-        <div className="rounded-md bg-gray-200 p-3 shadow-lg">
-            <p className="text-gray-600 mb-4 font-semibold">Budget For {prevCategory||'Nil'}</p>
+        <div className="rounded-md bg-gray-200 dark:bg-gray-600 p-3 shadow-lg">
+            <p className="text-gray-600 dark:text-white mb-4 font-semibold">Budget For {prevCategory||'Nil'}</p>
             <span className="font-bold text-xl">${budgetCategory.length == 1 && Number(budgetCategory[0]['amount']).toLocaleString()||0}</span>
             <span className="block text-md font-bold mt-3">Used Amount: ${expense.toLocaleString()}</span>
             <div className="mt-3 max-w-52 h-3 bg-white rounded-lg">
@@ -66,13 +66,13 @@ const Dashboard = () => {
      </div>
       <Link to="/set_budget" className="mb-4 text-md font-semibold p-2 rounded-md w-[70%] mx-auto flex justify-center outline-none pl-3 bg-gray-900 cursor-pointer shadow-lg text-lg text-white lg:w-[32%] lg:mx-0 ">Set Budget</Link>   
      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
+        <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-800 dark:border rounded-md shadow-lg">
             <span className="font-semibold">Recurring Bills</span>
-            <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">${recurringBills}</span>
+            <span className="block p-2 bg-gray-200 dark:bg-gray-800 py-1 px-4 rounded-xl font-semibold">${recurringBills}</span>
         </div>
-        <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
+        <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-800 dark:border rounded-md shadow-lg">
             <span className="font-semibold">Largest Category</span>
-            <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{largestCategory}</span>
+            <span className="block p-2 bg-gray-200 dark:bg-gray-800 py-1 px-4 rounded-xl font-semibold">{largestCategory}</span>
         </div>
      </div>
      <CashFlowChart/>

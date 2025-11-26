@@ -24,12 +24,12 @@ const Reports = () => {
     },[])
 
     return ( 
-    <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white shadow-lg " id="reports">
+    <div className="max-w-5xl mx-auto p-5 rounded-lg bg-white dark:bg-gray-700 shadow-lg " id="reports">
         <h2 className="font-semibold text-lg mb-4">Reports</h2>
         <div className="flex items-center mt-3 m-4">
-            <span data-name='categories' className={`block py-1 w-24  text-sm text-center border border-gray-300 cursor-pointer rounded-tl-md rounded-bl-md font-semibold ${activeTab['categories'] ? 'bg-white':'bg-gray-200'}`} onClick={(e)=>handleTabChange(e)}>Categories</span>
-            <span data-name='cashFlow' className={`block py-1 w-24  text-sm text-center border border-gray-300 cursor-pointer font-semibold ${activeTab['cashFlow'] ? 'bg-white':'bg-gray-200'}`} onClick={(e)=>handleTabChange(e)}>Cash Flow</span>
-            <span data-name='trends' className={`block py-1 w-24  text-sm text-center border border-gray-300 cursor-pointer rounded-tr-md rounded-br-md font-semibold ${activeTab['trends'] ? 'bg-white':'bg-gray-200'}`} onClick={(e)=>handleTabChange(e)}>Trends</span>
+            <span data-name='categories' className={`block py-1 w-24  text-sm text-center border border-gray-300  dark:border-gray-900  cursor-pointer rounded-tl-md rounded-bl-md font-semibold ${activeTab['categories'] ? 'bg-white  dark:bg-gray-800':'bg-gray-200  dark:bg-gray-700'}`} onClick={(e)=>handleTabChange(e)}>Categories</span>
+            <span data-name='cashFlow' className={`block py-1 w-24  text-sm text-center border border-gray-300  dark:border-gray-900  cursor-pointer font-semibold ${activeTab['cashFlow'] ? 'bg-white dark:bg-gray-800':'bg-gray-200 dark:bg-gray-700'}`} onClick={(e)=>handleTabChange(e)}>Cash Flow</span>
+            <span data-name='trends' className={`block py-1 w-24  text-sm text-center border border-gray-300  dark:border-gray-900  cursor-pointer rounded-tr-md rounded-br-md font-semibold ${activeTab['trends'] ? 'bg-white dark:bg-gray-800':'bg-gray-200 dark:bg-gray-700'}`} onClick={(e)=>handleTabChange(e)}>Trends</span>
         </div>
         {activeTab['categories'] && <Categories/>}
         {activeTab['cashFlow'] && <CashFlow/>} 

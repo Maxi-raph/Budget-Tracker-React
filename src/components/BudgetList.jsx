@@ -49,25 +49,25 @@ const handleDelete = (category)=>{
 
     return ( 
     <div className="mb-2">
-    <div className="max-w-5xl justify-between items-center mx-auto p-3 rounded-tl-lg rounded-tr-lg bg-gray-300  mt-8 flex">
-    <span className="text-gray-800 font-semibold md:flex-10">Category</span>
-    <span className="text-gray-800 font-semibold md:flex-8">Amount</span>
-    <span className="text-gray-800 font-semibold md:flex-3">Actions</span>
+    <div className="max-w-5xl justify-between items-center mx-auto p-3 rounded-tl-lg rounded-tr-lg bg-gray-300 dark:bg-gray-700  mt-8 flex">
+    <span className="text-gray-800 dark:text-white font-semibold md:flex-10">Category</span>
+    <span className="text-gray-800 dark:text-white font-semibold md:flex-8">Amount</span>
+    <span className="text-gray-800 dark:text-white font-semibold md:flex-3">Actions</span>
     </div>  
     {budgetArr.length > 0 &&
         budgetArr.map((list,i)=>(
-            <div key={i} className="max-w-5xl justify-between items-center mx-auto p-3 bg-white border-b-2 border-gray-300 flex">
-            <span className="text-gray-800 font-semibold flex-1 ml-3">{list['category']}</span>
+            <div key={i} className="max-w-5xl justify-between items-center mx-auto p-3 bg-white border-b-2 border-gray-300 dark:bg-gray-700 flex">
+            <span className="text-gray-800 dark:text-white font-semibold flex-1 ml-3">{list['category']}</span>
             {editFlag[i]
             ?<input type="number" autoFocus={true} className="bg-slate-100  p-1 pl-3 rounded-lg w-30 flex-1 outline-none border border-gray-400" placeholder="$0" value={categoryToEditValue} onChange={(e)=>handleBudgetChange(e,i)}/>
-            :<span className="text-gray-800 font-semibold flex-1 text-center min-w-0 wrap-break-word">${Number(list['amount']).toLocaleString()}</span>
+            :<span className="text-gray-800 dark:text-white font-semibold flex-1 text-center min-w-0 wrap-break-word">${Number(list['amount']).toLocaleString()}</span>
             }
-            <div className="text-gray-800 font-semibold flex-1 justify-end gap-2 flex">
+            <div className="text-gray-800 dark:text-white font-semibold flex-1 justify-end gap-2 flex">
                 {!editFlag[i]
-                ? <span className="flex items-center px-1 text-sm rounded-lg border-2 cursor-pointer border-gray-400 text-gray-500" onClick={()=>handleEdit(i)}><FaEdit className="mr-1 inline-block"/>Edit</span>
-                : <span className="flex items-center px-1 text-sm rounded-lg border-2 cursor-pointer border-gray-400 text-gray-500" onClick={()=>handleSave(i)}><FaSave className="mr-1 inline-block"/>save</span>
+                ? <span className="flex items-center px-1 text-sm rounded-lg border-2 cursor-pointer border-gray-400 dark:border-gray-900 text-gray-500 dark:text-white" onClick={()=>handleEdit(i)}><FaEdit className="mr-1 inline-block"/>Edit</span>
+                : <span className="flex items-center px-1 text-sm rounded-lg border-2 cursor-pointer border-gray-400 dark:border-gray-900 text-gray-500 dark:text-white" onClick={()=>handleSave(i)}><FaSave className="mr-1 inline-block"/>save</span>
                 }
-                <span className="flex items-center px-1 text-sm rounded-lg border-2 cursor-pointer border-gray-400 text-red-500" onClick={()=>handleDelete(list['category'])}><FaTrash className="mr-1 inline-block"/>Del</span>
+                <span className="flex items-center px-1 text-sm rounded-lg border-2 cursor-pointer border-gray-400 text-red-500 dark:text-red-400  dark:border-gray-900" onClick={()=>handleDelete(list['category'])}><FaTrash className="mr-1 inline-block"/>Del</span>
             </div>
             </div> 
         ))

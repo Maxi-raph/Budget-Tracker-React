@@ -48,14 +48,14 @@ const CashFlowChart = () => {
     },[])
     return (
     <div className='mt-16 relative'>
-            <select ref={selectRef} value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
+            <select ref={selectRef} value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 dark:bg-gray-800 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
               <option value="" disabled className='font-semibold'>Show time period</option>
               <option value="this_week" className='font-semibold'>This Week</option>
               <option value="last_week" className='font-semibold'>Last Week</option>
               <option value="this_month" className='font-semibold'>This Month</option>
               <option value="last_month" className='font-semibold'>Last Month</option>
             </select>
-            <div className="flex justify-center items-center  rounded-md p-1 h-72 shadow-xl  text-gray-800 font-semibold bg-linear-to-br from-white/60 to-gray-300 border border-gray-200 backdrop-blur-xl">
+            <div className="flex justify-center items-center  rounded-md p-1 h-72 shadow-xl  text-gray-800 dark:text-white font-semibold bg-linear-to-br from-white/60 to-gray-300  dark:from-gray-500  dark:to-gray-800   dark:border-gray-900 border border-gray-200 backdrop-blur-xl">
                 {transactionArr.length > 1 && hasIncome && hasExpense
                 ? <Bar data={data} options={options}/>
                 : 'Add transactions to view cash flow...'}

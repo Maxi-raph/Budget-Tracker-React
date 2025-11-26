@@ -323,7 +323,7 @@ const Categories = () => {
     return( 
     <>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 relative mt-16">
-            <select value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
+            <select value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 dark:bg-gray-700 dark:border-gray-900 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
               <option value="" disabled className='font-semibold'>Show time period</option>
               <option value="today" className='font-semibold'>Today</option>
               <option value="this_week" className='font-semibold'>This Week</option>
@@ -331,7 +331,7 @@ const Categories = () => {
               <option value="this_month" className='font-semibold'>This Month</option>
               <option value="last_month" className='font-semibold'>Last Month</option>
             </select>
-            <div className="flex justify-center items-center  rounded-md p-1 h-72 shadow-xl  text-gray-800 font-semibold bg-linear-to-br from-white/60 to-gray-300 border border-gray-200 backdrop-blur-xl">
+            <div className="flex justify-center items-center  rounded-md p-1 h-72 dark:from-gray-500  dark:to-gray-800   dark:border-gray-900 dark:text-white shadow-xl  text-gray-800 font-semibold bg-linear-to-br from-white/60 to-gray-300 border border-gray-200 backdrop-blur-xl">
               {transactionArr.filter(item => item.type == 'Expense').length > 0 
               ? <div className="w-full h-full">
                 <Bar data={data} options={options} />
@@ -339,23 +339,23 @@ const Categories = () => {
               :' Add transactions to view categories chart...'}
             </div>
             <div className="flex flex-col gap-2">
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
                     <span className="font-semibold">Rent</span>
                      <span style={{backgroundColor:'rgba(255, 137, 0, 1)'}} className="block p-2 py-1 px-4 text-white rounded-xl font-semibold">{formatAmount(groupedObj['Rent']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
                     <span className="font-semibold">Food</span>
                      <span style={{backgroundColor:'rgba(34, 197, 0,1)'}} className="block p-2 py-1 px-4  text-white rounded-xl font-semibold">{formatAmount(groupedObj['Food']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
                     <span className="font-semibold">Utilities</span>
                      <span style={{backgroundColor:'rgba(59, 130, 246,1)'}}  className="block p-2 py-1 px-4 text-white rounded-xl font-semibold">{formatAmount(groupedObj['Utilities']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
                     <span className="font-semibold">Transport</span>
                      <span style={{backgroundColor:'rgba(20, 184, 166,1)'}}  className="block p-2 py-1 px-4 text-white  rounded-xl font-semibold">{formatAmount(groupedObj['Transport']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
                     <span className="font-semibold">Health</span>
                      <span style={{backgroundColor:'rgba(90, 30, 90,1)'}}  className="block p-2 py-1 px-4 text-white  rounded-xl font-semibold">{formatAmount(groupedObj['Health']||0)}</span>
                 </div>
