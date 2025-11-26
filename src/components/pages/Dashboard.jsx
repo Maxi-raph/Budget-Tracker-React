@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTransaction } from "../../context/TransactionContext";
 import { useBudget } from "../../context/BudgetContext";
 import {Link, useNavigate} from 'react-router'
+import CashFlowChart from "../CashFlowChart";
 
 
 
@@ -74,9 +75,7 @@ const Dashboard = () => {
             <span className="block p-2 bg-gray-200 py-1 px-4 rounded-xl font-semibold">{largestCategory}</span>
         </div>
      </div>
-     <div className="flex justify-center items-center rounded-md p-4 bg-gray-200 h-54 shadow-lg  text-gray-500">
-        No Cash Flow Yet...
-     </div>
+     <CashFlowChart/>
     </div> );
 }
  

@@ -32,11 +32,11 @@ export const Panel  = ()=>{
         <div 
         className={isPanelOpen?`fixed z-30 top-0 right-0 left-0 bottom-0 bg-black/60 md:hidden`:'hidden'} onClick={(e)=>panelClose(e)}
         ></div>
-        <div  className={`w-64 fixed top-17 left-0 min-h-screen z-50 bg-white  border-r border-r-gray-300 p-3 lg:top-0 md:top-0  sm:top-17 lg:block md:block transition duration-800 md:translate-x-0 ${isPanelOpen?'translate-x-0':'-translate-x-full'}`}>
+        <div  className={`w-64 fixed top-0 left-0 min-h-screen z-50 bg-white  border-r border-r-gray-300 p-3  md:top-0  md:block transition duration-800 md:translate-x-0 ${isPanelOpen?'translate-x-0':'-translate-x-full'}`}>
                 <FiX className='text-gray-800 text-2xl cursor-pointer absolute right-1 top-4  lg:hidden md:hidden  sm:block' onClick={()=>setIsPanelOpen(!isPanelOpen)}/>
             <div className='flex space-x-2 items-center mb-4'>
                 <FaWallet className='text-gray-800 text-md sm:text-xl'/> 
-                <header className="text-xl font-semibold">Budget Tracker</header>
+                <header className="text-xl font-semibold">Budgetly</header>
             </div>
             <NavLinks name={'Dashboard'} icon={<FaTachometerAlt className=' text-md'/>} id={'dashboard'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
             <NavLinks name={'Transactions'} icon={<FaExchangeAlt className=' text-md'/>} id={'transactions'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
