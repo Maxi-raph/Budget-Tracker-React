@@ -327,7 +327,7 @@ const Categories = () => {
     return( 
     <>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 relative mt-16">
-            <select value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 dark:bg-gray-700 dark:border-gray-900 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
+            <select value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 dark:bg-gray-800 dark:border-gray-900 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
               <option value="" disabled className='font-semibold'>Show time period</option>
               <option value="today" className='font-semibold'>Today</option>
               <option value="this_week" className='font-semibold'>This Week</option>

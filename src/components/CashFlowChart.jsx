@@ -48,7 +48,7 @@ const CashFlowChart = () => {
     },[])
     return (
     <div className='mt-12 relative'>
-            <select ref={selectRef} value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 dark:bg-gray-800 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
+            <select ref={selectRef} value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 dark:bg-gray-800 dark:border-gray-900 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>
               <option value="" disabled className='font-semibold'>Show time period</option>
               <option value="this_week" className='font-semibold'>This Week</option>
               <option value="last_week" className='font-semibold'>Last Week</option>
