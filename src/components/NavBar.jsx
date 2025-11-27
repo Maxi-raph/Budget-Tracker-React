@@ -19,6 +19,7 @@ const NavBar = () => {
       if(!name) return
 
     setIsToolTip(prev => ({'input':false, 'manageBudget':false, [name]:true}) )  
+    setTimeout(hideToolTip, 1500);
     } 
 
     const hideToolTip = ()=> setIsToolTip(prev => ({'input':false, 'manageBudget':false}))
@@ -38,7 +39,6 @@ const NavBar = () => {
          onMouseEnter={(e)=>showToolTip(e)}
          onMouseLeave={hideToolTip}
          onTouchStart={(e)=>showToolTip(e)}
-         onTouchEnd={hideToolTip}
          onChange={(e)=>handleSearch(e)}/>
         <span className={`absolute block py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-9 text-gray-700 transition-all duration-500 ${isToolTip['input'] ? 'opacity-100' : 'opacity-0'}`}>Search transactions by date</span>
         </div>
@@ -55,8 +55,7 @@ const NavBar = () => {
               <div data-name='manageBudget'  className="relative" 
               onMouseEnter={(e)=>showToolTip(e)} 
               onMouseLeave={hideToolTip}
-              onTouchStart={(e)=>showToolTip(e)}
-              onTouchEnd={hideToolTip}>
+              onTouchStart={(e)=>showToolTip(e)}>
                 <FaChartPie  className="text-2xl"/>
                 <span className={`absolute block w-38 text-center py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-10 right-0 text-gray-700 transition-all duration-500 ${isToolTip['manageBudget'] ? 'opacity-100' : 'opacity-0'}`}>Manage Budgets</span>
                 {exceededBudgetCount && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center">{exceededBudgetCount}</span>}
