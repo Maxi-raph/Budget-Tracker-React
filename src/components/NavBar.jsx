@@ -5,11 +5,12 @@ import { useBudget } from "../context/BudgetContext";
 import { useTransaction } from "../context/TransactionContext";
 import { Link } from "react-router";
 import { useTheme } from "../context/ThemeContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { format } from "date-fns";
 
 const NavBar = () => {
     const {exceededBudgetCount} = useBudget()
-    const {isPanelOpen,setIsPanelOpen} = useTransaction()
+    const {isPanelOpen,setIsPanelOpen,transactionArr} = useTransaction()
     const {toggleTheme,theme} = useTheme()
     const [isToolTip,setIsToolTip] =useState({'input':false, 'manageBudget':false})
     const [searchInput,setSearchInput] = useState('')
@@ -26,6 +27,13 @@ const NavBar = () => {
     const handleSearch = (e)=>{
       setSearchInput(e.target.value)
     }
+
+    const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd yyyy').toLowerCase().includes(searchInput))
+
+    useEffect(()=>{
+console.log(filterByTransactionDate);
+
+    },[searchInput])
 
 
 
