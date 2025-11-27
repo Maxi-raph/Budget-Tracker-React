@@ -149,7 +149,7 @@ const TransactionList = () => {
                         </div>
                 </form>
             </div>
-            <div className="bg-gray-200 dark:bg-gray-600  rounded-lg shadow-lg lg:w-[60%] sm:w-full">
+            <div className="bg-gray-200 dark:bg-gray-900  rounded-lg shadow-lg lg:w-[60%] sm:w-full">
                 <div className="flex justify-around items-center w-full py-2">
                     <span className="text-gray-600 text-sm sm:text-sm font-bold flex-2 text-center dark:text-white">Date</span>
                     <span className="text-gray-600 text-sm sm:text-sm hidden sm:block font-bold flex-4 text-center dark:text-white">Description</span>
@@ -164,7 +164,7 @@ const TransactionList = () => {
                     <span style={{backgroundColor:categoryColor(item['category'])}} className={`p-1 rounded-lg text-white text-sm sm:text-sm block font-semibold  flex-2 text-center dark:text-white`}>{item['category']}</span>
                     <span className={`text-gray-600 text-sm sm:text-sm font-bold  flex-3 text-center  min-w-0 wrap-break-word ${item['type'] == 'Expense'?'text-red-500 dark:text-red-400':'text-green-500 dark:text-green-400'}`}>{item['type'] == 'Expense'?'-':'+'}${Number(item['amount']).toLocaleString()}</span>
                     <div className={`text-gray-600  font-semibold flex-1 rounded-md`}>
-                    <span className="flex items-center justify-center px-1 text-xs rounded-lg border-2 cursor-pointer mr-1 border-gray-400 text-gray-500 dark:text-white dark:border-gray-900" onClick={()=>openModal(i,item['type'] )}><FaEdit className=" inline-block"/>Edit</span>
+                    <span className="flex items-center justify-center px-1 py-1 text-xs rounded-lg border-2 cursor-pointer mr-1 border-gray-400 text-gray-500 dark:text-white dark:border-gray-900" onClick={()=>openModal(i,item['type'] )}><FaEdit className=" inline-block"/>Edit</span>
                     </div>
                 </div>)
                 )}

@@ -16,6 +16,7 @@ import {
   Filler,
   Legend,
 } from 'chart.js';
+import { useTheme } from "../context/ThemeContext";
 
 
 ChartJS.register(
@@ -35,6 +36,7 @@ ChartJS.register(
 const Categories = () => {
     const [period,setPeriod] = useState('')
     const {transactionArr} = useTransaction()
+    const {theme} = useTheme()
  
     const formatAmount = useCallback((value)=>{
           if (value >= 1000000000000) {
@@ -57,7 +59,7 @@ const Categories = () => {
 
         transactions.forEach(item => {
             const key = item.category
-          if (isToday(item.date)) {
+          if (isToday(item.date) && item.type === 'Expense') {
               if (!obj[key]) obj[key] = 0
 
               if (item.category === "Rent") {
@@ -87,7 +89,7 @@ const Categories = () => {
         const end = endOfWeek(new Date())
 
         transactions.forEach(item => {
-          if (isWithinInterval(item.date, {start,end})) {
+          if (isWithinInterval(item.date, {start,end}) && item.type === 'Expense') {
             const key = item.category
               if (!obj[key]) obj[key] = 0
 
@@ -119,7 +121,7 @@ const Categories = () => {
         const end = endOfWeek(lastWeek)
 
         transactions.forEach(item => {
-          if (isWithinInterval(item.date, {start,end})) {
+          if (isWithinInterval(item.date, {start,end}) && item.type === 'Expense') {
             const key = item.category
               if (!obj[key]) obj[key] = 0
 
@@ -151,7 +153,7 @@ const Categories = () => {
         const end = endOfMonth(new Date())
 
         transactions.forEach(item => {
-          if (isWithinInterval(item.date, {start,end})) {
+          if (isWithinInterval(item.date, {start,end}) && item.type === 'Expense') {
             const key = item.category
               if (!obj[key]) obj[key] = 0
 
@@ -183,7 +185,7 @@ const Categories = () => {
         const end = endOfMonth(last)
 
         transactions.forEach(item => {
-          if (isWithinInterval(item.date, {start,end})) {
+          if (isWithinInterval(item.date, {start,end}) && item.type === 'Expense') {
             const key = item.category
               if (!obj[key]) obj[key] = 0
 
@@ -239,9 +241,11 @@ const Categories = () => {
         'Health':'rgba(90, 30, 90,1)'  
         }
     const groupedObj = getPeriod(period,transactionArr)
-    const grouped = Object.keys(groupedObj).sort()
+    const grouped = Object.keys(groupedObj)
     const categories = grouped.map(category => groupedObj[category])   
     const backgroundColors = grouped.map(category => categoryColorObj[category])
+    // Theme color for chart
+    const textColor = theme === "dark" ? "#ffffff" : "#000000";
 
     const data = {
         labels: grouped,
@@ -262,7 +266,7 @@ const Categories = () => {
      legend: {
       position: 'bottom',
       labels: {
-        color: '#374151',           
+        color: textColor,           
         font: {
           family: "'Inter', sans-serif", 
           size: 14,                 
@@ -283,7 +287,7 @@ const Categories = () => {
         display: false
       },
       ticks:{
-        color: 'black',
+        color: textColor,
         font:{
           family:  "'Inter', sans-serif",
           size: 13,
@@ -296,7 +300,7 @@ const Categories = () => {
     y: {
       beginAtZero: true,
       ticks:{
-        color: 'black',
+        color: textColor,
         font:{
           family:  "'Inter', sans-serif",
           size: 13,
@@ -339,23 +343,23 @@ const Categories = () => {
               :' Add transactions to view categories chart...'}
             </div>
             <div className="flex flex-col gap-2">
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 dark:border rounded-md shadow-lg">
                     <span className="font-semibold">Rent</span>
                      <span style={{backgroundColor:'rgba(255, 137, 0, 1)'}} className="block p-2 py-1 px-4 text-white rounded-xl font-semibold">{formatAmount(groupedObj['Rent']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 dark:border rounded-md shadow-lg">
                     <span className="font-semibold">Food</span>
                      <span style={{backgroundColor:'rgba(34, 197, 0,1)'}} className="block p-2 py-1 px-4  text-white rounded-xl font-semibold">{formatAmount(groupedObj['Food']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 dark:border rounded-md shadow-lg">
                     <span className="font-semibold">Utilities</span>
                      <span style={{backgroundColor:'rgba(59, 130, 246,1)'}}  className="block p-2 py-1 px-4 text-white rounded-xl font-semibold">{formatAmount(groupedObj['Utilities']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 dark:border rounded-md shadow-lg">
                     <span className="font-semibold">Transport</span>
                      <span style={{backgroundColor:'rgba(20, 184, 166,1)'}}  className="block p-2 py-1 px-4 text-white  rounded-xl font-semibold">{formatAmount(groupedObj['Transport']||0)}</span>
                 </div>
-                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 rounded-md shadow-lg">
+                <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-900 dark:border rounded-md shadow-lg">
                     <span className="font-semibold">Health</span>
                      <span style={{backgroundColor:'rgba(90, 30, 90,1)'}}  className="block p-2 py-1 px-4 text-white  rounded-xl font-semibold">{formatAmount(groupedObj['Health']||0)}</span>
                 </div>

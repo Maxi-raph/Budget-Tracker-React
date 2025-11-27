@@ -13,13 +13,13 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
   <TransactionProvider>
   <BudgetProvider>
-  <CashFlowProvider>
   <ThemeProvider>
+  <CashFlowProvider>
   <BrowserRouter>
      <App />   
   </BrowserRouter>     
-  </ThemeProvider>
   </CashFlowProvider>
+  </ThemeProvider>
   </BudgetProvider>
   </TransactionProvider>
   </StrictMode>,

@@ -1,6 +1,7 @@
 import { useContext,useCallback,useState, createContext } from "react";
-import { useTransaction } from '../context/TransactionContext';
+import { useTransaction } from './TransactionContext';
 import {startOfWeek, endOfWeek, subWeeks, format, startOfMonth, endOfMonth, isWithinInterval, subMonths} from "date-fns";
+import { useTheme } from "./ThemeContext";
 
 const CashFlowContext = createContext()
 
@@ -10,6 +11,8 @@ export const CashFlowProvider = ({children}) =>{
 
    // Context
     const {transactionArr} = useTransaction()
+    const {theme} = useTheme()
+
 
    // I checked that the transaction arr contains both expense and income before the chart can be shown
     const hasIncome = transactionArr.some(t => t.type === "Income");
@@ -129,12 +132,22 @@ export const CashFlowProvider = ({children}) =>{
     }
     
     const groupedObj = getPeriod(period,transactionArr)
-    const grouped = Object.keys(groupedObj).sort()
+    const grouped = Object.keys(groupedObj)
+
+    if (period === "this_week" || period === "last_week") {
+     const weekOrder = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    grouped.sort((a,b) => weekOrder.indexOf(a) - weekOrder.indexOf(b)); 
+
+    } else if (period === "this_month" || period === "last_month") {
+      grouped.sort((a,b) => Number(a) - Number(b));
+    }
+
     const income = grouped.map(date => groupedObj[date]['Income'])
     const expense = grouped.map(date => groupedObj[date]['Expense'])
     const totalIncome = income.reduce((acc,curr)=>acc + curr,0)
     const totalExpense = expense.reduce((acc,curr)=>acc + curr,0)
-
+    // Theme color for chart
+    const textColor = theme === "dark" ? "#ffffff" : "#000000";
 
    const data = {
     labels: grouped,
@@ -159,7 +172,7 @@ export const CashFlowProvider = ({children}) =>{
      legend: {
       position: 'bottom',
       labels: {
-        color: '#374151',           
+        color: textColor,           
         font: {
           family: "'Inter', sans-serif", 
           size: 14,                 
@@ -170,8 +183,7 @@ export const CashFlowProvider = ({children}) =>{
       }
     },
       title: {
-        display: false,
-        text: 'Spending by Category'
+        display: false
       }
     },
     scales: {
@@ -180,7 +192,7 @@ export const CashFlowProvider = ({children}) =>{
         display: false
       },
       ticks:{
-        color: 'black',
+        color: textColor,
         font:{
           family:  "'Inter', sans-serif",
           size: 13,
@@ -193,7 +205,7 @@ export const CashFlowProvider = ({children}) =>{
     y: {
       beginAtZero: true,
       ticks:{
-        color: 'black',
+        color: textColor,
         font:{
           family:  "'Inter', sans-serif",
           size: 13,
