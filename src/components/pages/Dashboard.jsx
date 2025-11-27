@@ -70,7 +70,7 @@ const Dashboard = () => {
             <span className="font-semibold">Recurring Bills</span>
             <span className="block p-2 bg-gray-200 dark:bg-gray-800 py-1 px-4 rounded-xl font-semibold">${recurringBills}</span>
         </div>
-        <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-800 dark:border rounded-md shadow-lg">
+        <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-800 dark:border rounded-md shadow-lg mb-6">
             <span className="font-semibold">Largest Category</span>
             <span className="block p-2 bg-gray-200 dark:bg-gray-800 py-1 px-4 rounded-xl font-semibold">{largestCategory}</span>
         </div>
