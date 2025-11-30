@@ -53,22 +53,23 @@ console.log(filterByTransactionDate);
         <div className="flex space-x-4 items-center mr-6 cursor-pointer">
             <button onClick={toggleTheme} className='cursor-pointer'>
               {
-              theme === 'light'             
+              theme === 'dark'             
                 ? <HiOutlineSun className="text-3xl text-yellow-500" />
                 : <HiOutlineMoon className="text-2xl text-gray-500 dark:text-white" />
               }
             </button>
 
-            <Link to={'/manage_budget'}>
-              <div data-name='manageBudget'  className="relative" 
-              onMouseEnter={(e)=>showToolTip(e)} 
-              onMouseLeave={hideToolTip}
-              onTouchStart={(e)=>showToolTip(e)}>
-                <FaChartPie  className="text-2xl"/>
-                <span className={`absolute block w-38 text-center py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-10 right-0 text-gray-700 transition-all duration-500 ${isToolTip['manageBudget'] ? 'opacity-100' : 'opacity-0'}`}>Manage Budgets</span>
-                {exceededBudgetCount && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center">{exceededBudgetCount}</span>}
+              <div >
+                <Link to={'/manage_budget'} 
+                data-name='manageBudget'  className="relative" 
+                onMouseEnter={(e)=>showToolTip(e)} 
+                onMouseLeave={hideToolTip}
+                onTouchStart={(e)=>showToolTip(e)}>
+                  <FaChartPie  className="text-2xl"/>
+                  <span className={`pointer-events-none absolute block w-38 text-center py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-12 right-0 text-gray-700 transition-all duration-500 ${isToolTip['manageBudget'] ? 'opacity-100' : 'opacity-0'}`}>Manage Budgets</span>
+                  {exceededBudgetCount && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center ">{exceededBudgetCount}</span>}
+                </Link>              
               </div>
-            </Link>
         </div>
     </div> );
 }
