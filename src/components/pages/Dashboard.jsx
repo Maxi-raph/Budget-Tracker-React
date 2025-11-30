@@ -52,7 +52,7 @@ const Dashboard = () => {
         </div>
         <div className="rounded-md bg-gray-200 dark:bg-gray-600 p-3 shadow-lg">
             <p className="text-gray-600 dark:text-white mb-4 font-semibold">Total Expenses</p>
-            <span className="font-bold text-xl text-red-500">${totalExpense?.toLocaleString()}</span>
+            <span className="font-bold text-xl text-red-500 dark:text-red-300">${totalExpense?.toLocaleString()}</span>
         </div>
         <div className="rounded-md bg-gray-200 dark:bg-gray-600 p-3 shadow-lg">
             <p className="text-gray-600 dark:text-white mb-4 font-semibold">Budget For {prevCategory||'Nil'}</p>
