@@ -29,7 +29,7 @@ const NavBar = () => {
       setSearchInput(e.target.value)
     }
 
-    const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd').toLowerCase().includes(searchInput))
+    const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd').toLowerCase().includes(searchInput.toLowerCase()))
 
 
 

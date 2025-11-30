@@ -1,7 +1,7 @@
 import { format } from "date-fns"
 import { useCallback } from "react"
 
-const FilteredList = ({filterByTransactionDate}) => {
+const FilteredList = ({filterByTransactionDate}) =>{
     if( filterByTransactionDate.length < 1)return
     const categoryColor = useCallback((category)=>{
         const categoryColorObj = {
@@ -19,7 +19,7 @@ const FilteredList = ({filterByTransactionDate}) => {
         return categoryColorObj[category]
     },[filterByTransactionDate])
 
-   return ( <div className="absolute mt-3 pt-1 bg-gray-300 dark:bg-gray-900 w-[84%] md:w-full rounded-lg shadow-lg">
+   return ( <div className="absolute mt-3 pt-1 bg-gray-300 dark:bg-gray-900 w-full rounded-lg shadow-lg">
                 <div className="flex justify-around items-center w-full py-2">
                     <span className="text-gray-600 text-sm sm:text-sm font-bold flex-1 text-center dark:text-white">Date</span>
                     <span className="text-gray-600 text-sm sm:text-sm hidden flex-1 sm:block font-bold text-center dark:text-white">Description</span>
@@ -36,5 +36,5 @@ const FilteredList = ({filterByTransactionDate}) => {
         ))}
     </div> )
 }
- 
+
 export default FilteredList;
