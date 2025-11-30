@@ -41,8 +41,7 @@ const CashFlowChart = () => {
             
             setPeriod(prev =>{
                 prev = 'this_week'
-                getPeriod(prev,transactionArr)
-                return ''
+                return prev
             })
         }
     },[])

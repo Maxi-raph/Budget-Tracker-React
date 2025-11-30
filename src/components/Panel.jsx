@@ -51,7 +51,7 @@ export const Panel  = ()=>{
                 </div>
                 <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white  mb-3 dark:bg-gray-600">
                     <span className='text-gray-600 dark:text-white'>Expenses</span>
-                    <span className='font-semibold text-red-500'>{formatAmount(Number(totalExpense))}</span>
+                    <span className='font-semibold text-red-500 dark:text-red-300'>{formatAmount(Number(totalExpense))}</span>
                 </div>
                 <div className="flex gap-3 flex-col sm:flex-row sm:gap-0 justify-between items-center p-2 rounded-md bg-white mb-3 dark:bg-gray-600">
                     <span className='text-gray-600 dark:text-white'>Balance</span>

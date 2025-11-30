@@ -13,7 +13,7 @@ const CashFlow = () => {
                 </div>
                 <div className="rounded-md bg-gray-300 p-3 shadow-lg dark:bg-gray-800">
                     <p className="mb-4 font-semibold">Total Expenses</p>
-                    <span className="font-bold text-xl text-red-700 dark:text-red-500">${totalExpense?.toLocaleString()}</span>
+                    <span className="font-bold text-xl text-red-700 dark:text-red-300">${totalExpense?.toLocaleString()}</span>
                 </div>
                 <div className="rounded-md bg-gray-300 p-3 shadow-lg dark:bg-gray-800">
                     <p className="mb-4 font-semibold">Remaining Balance</p>

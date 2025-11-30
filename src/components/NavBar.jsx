@@ -5,8 +5,9 @@ import { useBudget } from "../context/BudgetContext";
 import { useTransaction } from "../context/TransactionContext";
 import { Link } from "react-router";
 import { useTheme } from "../context/ThemeContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
+import FilteredList from "./FilteredList";
 
 const NavBar = () => {
     const {exceededBudgetCount} = useBudget()
@@ -28,12 +29,8 @@ const NavBar = () => {
       setSearchInput(e.target.value)
     }
 
-    const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd yyyy').toLowerCase().includes(searchInput))
+    const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd').toLowerCase().includes(searchInput))
 
-    useEffect(()=>{
-console.log(filterByTransactionDate);
-
-    },[searchInput])
 
 
 
@@ -42,13 +39,14 @@ console.log(filterByTransactionDate);
         <FiMenu className={`text-gray-800 text-4xl  rounded-sm cursor-pointer dark:text-white  lg:hidden md:hidden ${isPanelOpen?'hidden':'block'}` } onClick={()=>setIsPanelOpen(true)}/>
         <div className="relative w-full pl-2">
         <FaSearch className="absolute cursor-pointer top-3 left-5 text-gray-500 dark:text-black" />
-        <input type="text" data-name='input' placeholder="Search transactions, categories..." className="outline-none rounded-md text-gray-900 placeholder:text-sm  dark:bg-gray-100 dark:placeholder:text-black p-2 pl-9 bg-white border border-gray-300 shadow-lg text-md w-[84%] md:w-[60%]"
+        <input type="text" data-name='input' placeholder="Search transactions..." className="outline-none rounded-md text-gray-900 placeholder:text-sm  dark:bg-gray-100 dark:placeholder:text-black p-2 pl-9 bg-white border border-gray-300 shadow-lg text-md w-[84%] md:w-[60%]"
          value={searchInput}
          onMouseEnter={(e)=>showToolTip(e)}
          onMouseLeave={hideToolTip}
          onTouchStart={(e)=>showToolTip(e)}
          onChange={(e)=>handleSearch(e)}/>
-        <span className={`absolute block py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-9 text-gray-700 transition-all duration-500 ${isToolTip['input'] ? 'opacity-100' : 'opacity-0'}`}>Search transactions by date</span>
+        <span className={`absolute z-32 block py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-9 text-gray-700 transition-all duration-500 ${isToolTip['input'] ? 'opacity-100' : 'opacity-0'}`}>Search transactions by day</span>
+        <FilteredList filterByTransactionDate={filterByTransactionDate}/>
         </div>
         <div className="flex space-x-4 items-center mr-6 cursor-pointer">
             <button onClick={toggleTheme} className='cursor-pointer'>
@@ -59,9 +57,9 @@ console.log(filterByTransactionDate);
               }
             </button>
 
-              <div >
+              <div className="relative">
                 <Link to={'/manage_budget'} 
-                data-name='manageBudget'  className="relative" 
+                data-name='manageBudget'   
                 onMouseEnter={(e)=>showToolTip(e)} 
                 onMouseLeave={hideToolTip}
                 onTouchStart={(e)=>showToolTip(e)}>

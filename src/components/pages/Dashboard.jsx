@@ -65,12 +65,12 @@ const Dashboard = () => {
         </div>    
      </div>
       <Link to="/set_budget" className="mb-4 text-md font-semibold p-2 rounded-md w-[70%] mx-auto flex justify-center outline-none pl-3 bg-gray-900 cursor-pointer shadow-lg text-lg text-white lg:w-[32%] lg:mx-0 ">Set Budget</Link>   
-     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-18">
         <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-800 dark:border rounded-md shadow-lg">
             <span className="font-semibold">Recurring Bills</span>
             <span className="block p-2 bg-gray-200 dark:bg-gray-800 py-1 px-4 rounded-xl font-semibold">${recurringBills}</span>
         </div>
-        <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-800 dark:border rounded-md shadow-lg mb-6">
+        <div className="flex justify-between items-center p-2 border-2 border-gray-100 dark:border-gray-800 dark:border rounded-md shadow-lg">
             <span className="font-semibold">Largest Category</span>
             <span className="block p-2 bg-gray-200 dark:bg-gray-800 py-1 px-4 rounded-xl font-semibold">{largestCategory}</span>
         </div>

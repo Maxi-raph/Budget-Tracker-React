@@ -139,7 +139,7 @@ export const CashFlowProvider = ({children}) =>{
     grouped.sort((a,b) => weekOrder.indexOf(a) - weekOrder.indexOf(b)); 
 
     } else if (period === "this_month" || period === "last_month") {
-      grouped.sort((a,b) => Number(a) - Number(b));
+      grouped.sort((a,b) => Number(a.slice(4)) - Number(b.slice(4)));
     }
 
     const income = grouped.map(date => groupedObj[date]['Income'])
