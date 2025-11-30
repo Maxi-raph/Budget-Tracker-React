@@ -35,7 +35,7 @@ const NavBar = () => {
         <FiMenu className={`text-gray-800 text-4xl  rounded-sm cursor-pointer dark:text-white  lg:hidden md:hidden ${isPanelOpen?'hidden':'block'}` } onClick={()=>setIsPanelOpen(true)}/>
         <div className="relative w-full pl-2">
         <FaSearch className="absolute cursor-pointer top-3 left-5 text-gray-500 dark:text-black" />
-        <input type="text" data-name='input' placeholder="Search transactions..." className="outline-none rounded-md text-gray-900 placeholder:text-sm  dark:bg-gray-100 dark:placeholder:text-black p-2 pl-9 bg-white border border-gray-300 shadow-lg text-md w-[84%] md:w-[60%]"
+        <input type="text" data-name='input' placeholder="Search transactions..." className="outline-none rounded-md text-gray-900 placeholder:text-sm  dark:bg-gray-100 dark:placeholder:text-black p-1 md:p-2 pl-9 bg-white border border-gray-300 shadow-lg text-md w-[90%] md:w-[60%]"
          value={searchInput}
          onMouseEnter={(e)=>showToolTip(e)}
          onMouseLeave={hideToolTip}
@@ -54,7 +54,7 @@ const NavBar = () => {
             </button>
 
               <div className="relative">
-                <Link to={'/manage_budget'} 
+                <Link to={'/manage_budgets'} 
                 data-name='manageBudget'   
                 onMouseEnter={(e)=>showToolTip(e)} 
                 onMouseLeave={hideToolTip}

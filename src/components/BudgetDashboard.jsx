@@ -16,7 +16,7 @@ const BudgetDashboard = () => {
             <Route path="/set_budget" element={<SetBudget />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/reports" element={<Reports />} />
-            <Route path='/manage_budget' element={<ManageBudgets />}/>
+            <Route path='/manage_budgets' element={<ManageBudgets />}/>
             <Route path='/settings' element={<Settings />}/>
         </Routes>
     </div> );
