@@ -29,11 +29,7 @@ const NavBar = () => {
       setSearchInput(e.target.value)
     }
 
-    const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd').toLowerCase().includes(searchInput.toLowerCase()))
-
-
-
-
+    const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd').toLowerCase().includes(searchInput.toLowerCase())).sort((a,b)=> format(a.date, 'MMM dd').slice(4) - format(b.date, 'MMM dd').slice(4))
 
     return ( <div className="flex justify-between gap-3 shadow-sm items-center p-3  w-full fixed z-20 top-0 left-0 sm:pl-0 md:pl-64 lg:pl-64 bg-gray-100/30 dark:bg-gray-900/30 backdrop-blur-xs">
         <FiMenu className={`text-gray-800 text-4xl  rounded-sm cursor-pointer dark:text-white  lg:hidden md:hidden ${isPanelOpen?'hidden':'block'}` } onClick={()=>setIsPanelOpen(true)}/>
