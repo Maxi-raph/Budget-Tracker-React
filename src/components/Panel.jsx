@@ -41,7 +41,6 @@ export const Panel  = ()=>{
             <NavLinks name={'Dashboard'} icon={<FaTachometerAlt className=' text-md'/>} id={'dashboard'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
             <NavLinks name={'Transactions'} icon={<FaExchangeAlt className=' text-md'/>} id={'transactions'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
             <NavLinks name={'Reports'} icon={<FaChartLine className=' text-md'/>} id={'reports'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
-            <NavLinks name={'Settings'} icon={<FaCog  className="text-md"/>} id={'settings'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>              
 
             <div className='bg-gray-200 rounded-lg p-2 mt-6 shadow-lg block dark:bg-gray-800'>
                 <h2 className='text-gray-600 font-medium mb-3 dark:text-white'>Quick Totals</h2>

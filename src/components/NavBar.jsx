@@ -35,13 +35,13 @@ const NavBar = () => {
         <FiMenu className={`text-gray-800 text-4xl  rounded-sm cursor-pointer dark:text-white  lg:hidden md:hidden ${isPanelOpen?'hidden':'block'}` } onClick={()=>setIsPanelOpen(true)}/>
         <div className="relative w-full pl-2">
         <FaSearch className="absolute cursor-pointer top-3 left-5 text-gray-500 dark:text-black" />
-        <input type="text" data-name='input' placeholder="Search transactions..." className="outline-none rounded-md text-gray-900 placeholder:text-sm  dark:bg-gray-100 dark:placeholder:text-black p-1 md:p-2 pl-9 bg-white border border-gray-300 shadow-lg text-md w-[90%] md:w-[60%]"
+        <input type="text" data-name='input' placeholder="Search transactions..." className="outline-none rounded-md text-gray-900 placeholder:text-sm  dark:bg-gray-100 dark:placeholder:text-black p-1 md-p-2  pl-9 md:pl-9 bg-white border border-gray-300 shadow-lg text-md w-[90%] md:w-[60%]"
          value={searchInput}
          onMouseEnter={(e)=>showToolTip(e)}
          onMouseLeave={hideToolTip}
          onTouchStart={(e)=>showToolTip(e)}
          onChange={(e)=>handleSearch(e)}/>
-        <span className={`absolute z-32 block py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-9 text-gray-700 transition-all duration-500 ${isToolTip['input'] ? 'opacity-100' : 'opacity-0'}`}>Search transactions by day</span>
+        <span className={`absolute z-32 block py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-9 text-sm text-gray-700 transition-all duration-500 ${isToolTip['input'] ? 'opacity-100' : 'opacity-0'}`}>Search transactions by day</span>
         <FilteredList filterByTransactionDate={filterByTransactionDate}/>
         </div>
         <div className="flex space-x-4 items-center mr-6 cursor-pointer">
@@ -60,7 +60,7 @@ const NavBar = () => {
                 onMouseLeave={hideToolTip}
                 onTouchStart={(e)=>showToolTip(e)}>
                   <FaChartPie  className="text-2xl"/>
-                  <span className={`pointer-events-none absolute block w-38 text-center py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-12 right-0 text-gray-700 transition-all duration-500 ${isToolTip['manageBudget'] ? 'opacity-100' : 'opacity-0'}`}>Manage Budgets</span>
+                  <span className={`pointer-events-none absolute block w-38 text-center py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-12 right-0 text-sm text-gray-700 transition-all duration-500 ${isToolTip['manageBudget'] ? 'opacity-100' : 'opacity-0'}`}>Manage Budgets</span>
                   {exceededBudgetCount && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center ">{exceededBudgetCount}</span>}
                 </Link>              
               </div>

@@ -3,7 +3,6 @@ import Reports from "./pages/Reports";
 import Transactions from './pages/Transactions';
 import SetBudget from "./pages/SetBudget";
 import ManageBudgets from "./pages/ManageBudgets";
-import Settings from "./pages/Settings";
 import { Routes, Route } from "react-router";
 import ScrollTop from "./ScrollTop";
 
@@ -17,7 +16,6 @@ const BudgetDashboard = () => {
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/reports" element={<Reports />} />
             <Route path='/manage_budgets' element={<ManageBudgets />}/>
-            <Route path='/settings' element={<Settings />}/>
         </Routes>
     </div> );
 }
