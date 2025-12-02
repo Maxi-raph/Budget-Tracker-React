@@ -10,7 +10,7 @@ import { format } from "date-fns";
 import FilteredList from "./FilteredList";
 
 const NavBar = () => {
-    const {exceededBudgetCount} = useBudget()yy
+    const {exceededBudgetCount} = useBudget()
     const {isPanelOpen,setIsPanelOpen,transactionArr} = useTransaction()
     const {toggleTheme,theme} = useTheme()
     const [isToolTip,setIsToolTip] =useState({'input':false, 'manageBudget':false})
