@@ -61,7 +61,7 @@ const Dashboard = () => {
             <div className="mt-3 max-w-52 h-3 bg-white rounded-lg">
                 <span style={{ width: `${limitWidth}%` }} className={`h-full rounded-lg block ${limitWidth < 50 ?'bg-green-500': limitWidth < 75 ?' bg-amber-500': ' bg-red-500'}`}></span>
             </div>
-            <span className={`text-red-600 mt-1 ${budgetCategory.length == 1 && budgetCategory[0]['amount'] < expense ? 'block' : 'hidden'}`}>Budget exceeded by ${budgetCategory.length == 1 && (expense -  Number(budgetCategory[0]['amount'])).toLocaleString()}</span>
+            <span className={`text-red-600 dark:text-red-300  mt-1 ${budgetCategory.length == 1 && budgetCategory[0]['amount'] < expense ? 'block' : 'hidden'}`}>Budget exceeded by ${budgetCategory.length == 1 && (expense -  Number(budgetCategory[0]['amount'])).toLocaleString()}</span>
         </div>    
      </div>
       <Link to="/set_budget" className="mb-4 text-md font-semibold p-2 rounded-md w-[70%] mx-auto flex justify-center outline-none pl-3 bg-gray-900 cursor-pointer shadow-lg text-lg text-white lg:w-[32%] lg:mx-0 ">Set Budget</Link>   
