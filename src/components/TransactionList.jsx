@@ -8,10 +8,6 @@ import "../datepicker.css";
 
 
 const TransactionList = () => {
-    const day = useMemo(()=>new Date().toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    }),[new Date()])
     const {transactionArr,setTransactionArr,prevCategory,setPrevCategory} = useTransaction()
     const [index,setIndex] = useState(null)
     const [transactionType,setTransactionType] = useState('')
@@ -33,7 +29,7 @@ const TransactionList = () => {
     });
     }
 
-    const handleSave = useCallback((e)=>{
+    const handleSave = (e)=>{
         e.preventDefault()
             let updatedArr = ''
             updatedArr = transactionArr.map((item,i) =>  i === index ? updatedTransaction :item) 
@@ -41,7 +37,7 @@ const TransactionList = () => {
             setTransactionArr(updatedArr) 
             setIndex(null)
             setIsModalOpen(prev => prev = false)
-    },[updatedTransaction])
+    }
 
     const handleDelete = (e)=>{
         e.preventDefault()
