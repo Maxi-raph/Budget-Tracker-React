@@ -6,8 +6,7 @@ import { useTransaction}from '../../context/TransactionContext';
 
 
 const SetBudget = () => {
-    const {budgetArr,setBudgetArr,setExceededBudgetCount} = useBudget()
-    const {transactionArr} = useTransaction()
+    const {budgetArr,setBudgetArr} = useBudget()
     const [budgetDetails,setBudgetDetails] = useState({category:'',amount:''})
     const [warning,setWarning] = useState(false)
     const [isAwake,setIsAwake] = useState(false)
@@ -47,19 +46,6 @@ const SetBudget = () => {
       return ()=>  document.removeEventListener('visibilitychange',handleVisibility)  
     },[])
 
-    useEffect(()=>{
-        if (budgetArr.length > 0) {
-            let count = null
-            budgetArr.forEach(budget =>{
-            let expenses =  transactionArr.filter(item => item.category === budget.category).reduce((acc,curr) => acc + Number(curr.amount),0)
-            if(expenses > budget['amount']) count++
-            })
-            setExceededBudgetCount(count)
-        }else if (budgetArr.length === 0) {
-              setExceededBudgetCount(null)          
-        }
-        
-    },[transactionArr,budgetArr])
 
     return (    
     <>
@@ -84,7 +70,7 @@ const SetBudget = () => {
             </div>
             <button className=" bg-gray-300 dark:bg-gray-900 cursor-pointer p-2 font-semibold rounded-lg" type='submit'><FaPlus className='mr-2 inline-block'/>Add Category</button>
         </form>
-        <p className={`p-2 rounded-lg flex items-center bg-gray-200 dark:bg-gray-900 dark:text-white mt-6  md:font-semibold ${warning?'text-red-500 dark:text-red-300':'text-gray-400'}`}><FaInfo className={`text-md inline-block ml-2 mr-2 border-2 border-gray-400 rounded-full ${warning?'border-red-500 dark:border-red-300':'border-gray-400'}`}/>{warning?'Category has already been set, edit below':'Each category can only be added once'}.</p>
+        <p className={`p-2 rounded-lg flex items-center bg-gray-200 dark:bg-gray-900 dark:text-white mt-6  md:font-semibold ${warning?'text-red-500 dark:text-red-300!':'text-gray-400'}`}><FaInfo className={`text-md inline-block ml-2 mr-2 border-2 border-gray-400 rounded-full ${warning?'border-red-500 dark:border-red-300':'border-gray-400'}`}/>{warning?'Category has already been set, edit below':'Each category can only be added once'}.</p>
     </div> 
     <BudgetList setWarning={setWarning}/>
     </>);

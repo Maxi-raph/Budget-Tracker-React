@@ -61,7 +61,7 @@ const NavBar = () => {
                 onTouchStart={(e)=>showToolTip(e)}>
                   <FaChartPie  className="text-2xl"/>
                   <span className={`pointer-events-none absolute block w-38 text-center py-1 px-2 bg-gray-100 dark:text-white dark:bg-gray-600 rounded-lg shadow-lg -bottom-12 right-0 text-gray-700 text-sm transition-all duration-500 ${isToolTip['manageBudget'] ? 'opacity-100' : 'opacity-0'}`}>Manage Budgets</span>
-                  {exceededBudgetCount && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center ">{exceededBudgetCount}</span>}
+                  {exceededBudgetCount > 0 && <span className=" absolute bg-red-500 w-4 h-4 rounded-full -top-2 -right-3 text-xs text-white font-semibold flex justify-center items-center ">{exceededBudgetCount}</span>}
                 </Link>              
               </div>
         </div>
