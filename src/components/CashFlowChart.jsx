@@ -33,19 +33,17 @@ ChartJS.register(
 
 const CashFlowChart = () => {
   // cash flow values and handlers gotten from cash flow context
-    const {period,setPeriod,getPeriod,hasIncome,hasExpense,data,options} = useCashFlow()
+    const {period,setPeriod,getPeriod,hasIncome,hasExpense,data,options,selectRef} = useCashFlow()
 
   // transaction values gotten from transaction context
     const {transactionArr} = useTransaction()
 
-  // ref for select element
-    const selectRef = useRef()
   
   // useEffect to set default period to 'this_week' on component unmount
     useEffect(()=>{
-
+        selectRef.current.selectedIndex = 0
         return ()=>{
-          selectRef.current.selectedIndex = 0 
+
             setPeriod(prev =>{
                 prev = 'this_week'
                 return prev

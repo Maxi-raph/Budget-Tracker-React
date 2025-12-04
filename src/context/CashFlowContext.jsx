@@ -1,4 +1,4 @@
-import { useContext,useCallback,useState, createContext } from "react";
+import { useContext,useCallback,useState,useRef, createContext } from "react";
 import { useTransaction } from './TransactionContext';
 import {startOfWeek, endOfWeek, subWeeks, format, startOfMonth, endOfMonth, isWithinInterval, subMonths} from "date-fns";
 import { useTheme } from "./ThemeContext";
@@ -12,7 +12,9 @@ export const CashFlowProvider = ({children}) =>{
    // get transaction and theme context values
     const {transactionArr} = useTransaction()
     const {theme} = useTheme()
-
+ 
+    // ref for select element
+    const selectRef = useRef()
 
    // I checked that the transaction arr contains both expense and income before the chart can be shown
     const hasIncome = transactionArr.some(t => t.type === "Income");
@@ -236,7 +238,7 @@ export const CashFlowProvider = ({children}) =>{
 
 
     return(
-        <CashFlowContext.Provider value={{hasIncome,hasExpense,data,options,totalIncome,totalExpense,period,setPeriod,getPeriod}}>
+        <CashFlowContext.Provider value={{hasIncome,hasExpense,data,options,totalIncome,totalExpense,period,setPeriod,getPeriod,selectRef}}>
             {children}
         </CashFlowContext.Provider>
     )
