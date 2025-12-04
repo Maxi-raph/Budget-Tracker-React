@@ -6,12 +6,15 @@ import { useTransaction}from '../../context/TransactionContext';
 
 
 const SetBudget = () => {
+    // budget values gotten from budget context
     const {budgetArr,setBudgetArr} = useBudget()
+    // internal state
     const [budgetDetails,setBudgetDetails] = useState({category:'',amount:''})
     const [warning,setWarning] = useState(false)
     const [isAwake,setIsAwake] = useState(false)
     const categorySelectRef = useRef()
 
+    // handlers for form inputs
     const handleCategoryChange = (e)=>{
         setBudgetDetails(prev=>({...prev,[e.target.name]:e.target.value}))
         setWarning(false)
@@ -21,6 +24,7 @@ const SetBudget = () => {
        setBudgetDetails(prev=>({...prev,[e.target.name]:e.target.value}))
     }
 
+    // function to add budget category to budget array in budget context
     const addCategory = (e)=>{
         e.preventDefault()
         const categoryExists = budgetArr.some(item=>item['category'] == budgetDetails['category'])
@@ -35,6 +39,7 @@ const SetBudget = () => {
         }
     }
 
+    // useEffect to listen to visibility change event to update the isAwake state when the document becomes visible
     useEffect(()=>{
       const handleVisibility = ()=>{
         if (document.visibilityState === 'visible') {

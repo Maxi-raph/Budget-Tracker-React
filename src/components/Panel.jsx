@@ -6,12 +6,16 @@ import { useTransaction } from '../context/TransactionContext';
 
 export const Panel  = ()=>{
 
+    // get transaction context values
   const{transactionArr,totalIncome,totalExpense,activeLink,setActiveLink,isPanelOpen,setIsPanelOpen} = useTransaction()
+  
+    // function to close panel on overlay click
     const panelClose = (e)=>{
         if(!isPanelOpen)return
         setIsPanelOpen(false)
     } 
     
+    // function to format amount values
     const formatAmount = useCallback((value)=>{
           if (value >= 1000000000000) {
            return `$${(value/1000000000000).toFixed(1)}T`

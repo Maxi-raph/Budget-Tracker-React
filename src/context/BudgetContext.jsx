@@ -7,17 +7,17 @@ const BudgetContext  = createContext()
 
 export const BudgetProvider = ({children})=>{
 
-    //Context
+    // get transaction context values
  const {transactionArr} = useTransaction()
 
-    //States
+    // internal state
  const [budget,setBudget] = useState('')
  const [budgetExists,setBudgetExists] = useState(false)
  const [budgetArr,setBudgetArr] = useState([])
  const [exceededBudgetCount,setExceededBudgetCount] = useState(null)
 
 
-    //useEffect
+    // useEffect to update exceededBudgetCount whenever transactionArr or budgetArr changes
       useEffect(()=>{
         if (budgetArr.length > 0){
             let count = 0

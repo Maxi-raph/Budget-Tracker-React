@@ -8,12 +8,16 @@ import "../datepicker.css";
 
 
 const TransactionList = () => {
+    // get transaction context values and handlers
     const {transactionArr,setTransactionArr,prevCategory,setPrevCategory} = useTransaction()
+
+    // internal state
     const [index,setIndex] = useState(null)
     const [transactionType,setTransactionType] = useState('')
     const [isModalOpen,setIsModalOpen] = useState(false)
     const [updatedTransaction,setUpdatedTransaction] = useState({description: "", amount: '', type:'', category: '' ,date: ''})
    
+    // function to open modal and set the transaction to be edited
     const openModal = (i,type)=>{
      setIsModalOpen(true)
      setIndex(i)
@@ -29,6 +33,7 @@ const TransactionList = () => {
     });
     }
 
+    // handler to save edited transaction
     const handleSave = (e)=>{
         e.preventDefault()
             let updatedArr = ''
@@ -39,6 +44,7 @@ const TransactionList = () => {
             setIsModalOpen(prev => prev = false)
     }
 
+    //
     const handleDelete = (e)=>{
         e.preventDefault()
         setTransactionArr(prev => prev.filter((item,i) => i !== index))
@@ -46,6 +52,7 @@ const TransactionList = () => {
         setIsModalOpen(false)
       }
 
+    // handlers for form inputs
     const handleAmountEdit = (e)=>{
         setUpdatedTransaction(prev =>({...prev, amount:e.target.value}))
     }
@@ -58,6 +65,7 @@ const TransactionList = () => {
         setUpdatedTransaction(prev =>({...prev, description:e.target.value}))
     }
 
+    // function to get category color for transaction label
     const categoryColor = useCallback((category)=>{
         const categoryColorObj = {
         'Rent':'rgba(255, 137, 0, 1)',    

@@ -11,7 +11,7 @@ const {budgetArr,setBudgetArr,setExceededBudgetCount} = useBudget()
 const [editFlag,setEditFlag] = useState({0:false, 1:false,2:false,3:false,4:false})
 const [categoryToEditValue,setCategoryToEditValue] = useState('')
 
-//Functions
+// handlers for form inputs
 const handleBudgetChange = (e,index)=>{
     setCategoryToEditValue(prev =>{
         prev = e.target.value
@@ -25,6 +25,7 @@ const handleEdit =(i)=>{
     setCategoryToEditValue(budgetArr[i]['amount'])
 }
 
+// handler to save edited budget amount
 const handleSave =(i)=>{
      setEditFlag(prev=>({...prev, [i]:false}))
      setCategoryToEditValue('')
@@ -39,6 +40,7 @@ const handleSave =(i)=>{
               setExceededBudgetCount(null)          
         }
 }
+// handler to delete budget category
 const handleDelete = (category)=>{
      let newArr = [...budgetArr]
     newArr = newArr.filter(item =>item['category'] !== category)

@@ -8,12 +8,15 @@ import "../../datepicker.css";
 
 
 const Transactions = () => {
+   // transaction values and handlers gotten from transaction context
    const {
     transaction,setTransaction,chooseType,handleTypeClick,handleAmt,
     selectCategory,handleDesc,addTransaction} = useTransaction()
-   
+    
+   // internal state
     const [isAwake,setIsAwake] = useState(false)
 
+   // useEffect to listen to visibility change event to update the isAwake state when the document becomes visible
     useEffect(()=>{
       const handleVisibility = ()=>{
         if (document.visibilityState === 'visible') {

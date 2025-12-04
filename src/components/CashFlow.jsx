@@ -2,6 +2,7 @@ import { useCashFlow } from '../context/CashFlowContext';
 import CashFlowChart from './CashFlowChart'
 
 const CashFlow = () => {
+    // cash flow values gotten from cash flow context
     const {totalIncome,totalExpense} = useCashFlow()
     return ( 
          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

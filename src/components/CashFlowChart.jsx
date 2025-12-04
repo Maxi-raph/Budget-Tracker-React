@@ -32,19 +32,27 @@ ChartJS.register(
 );
 
 const CashFlowChart = () => {
+  // cash flow values and handlers gotten from cash flow context
     const {period,setPeriod,getPeriod,hasIncome,hasExpense,data,options} = useCashFlow()
+
+  // transaction values gotten from transaction context
     const {transactionArr} = useTransaction()
+
+  // ref for select element
     const selectRef = useRef()
+  
+  // useEffect to set default period to 'this_week' on component unmount
     useEffect(()=>{
 
         return ()=>{
-            
+          selectRef.current.selectedIndex = 0 
             setPeriod(prev =>{
                 prev = 'this_week'
                 return prev
             })
         }
     },[])
+
     return (
     <div className='mt-12 relative'>
             <select ref={selectRef} value={period} onChange={(e)=>setPeriod(e.target.value)} className='absolute -top-12 right-0 outline-0 bg-gray-300 dark:bg-gray-800 dark:border-gray-900 text-sm font-semibold  p-1 cursor-pointer rounded-lg border border-gray-400'>

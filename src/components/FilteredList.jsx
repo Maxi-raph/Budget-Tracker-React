@@ -2,6 +2,7 @@ import { format } from "date-fns"
 import { useCallback } from "react"
 
 const FilteredList = ({filterByTransactionDate}) =>{
+    // get category color function
     if( filterByTransactionDate.length < 1)return
     const categoryColor = useCallback((category)=>{
         const categoryColorObj = {

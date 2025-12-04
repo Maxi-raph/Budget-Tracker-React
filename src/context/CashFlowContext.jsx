@@ -6,10 +6,10 @@ import { useTheme } from "./ThemeContext";
 const CashFlowContext = createContext()
 
 export const CashFlowProvider = ({children}) =>{
-   // State
+   // internal state
     const [period,setPeriod] = useState('')
 
-   // Context
+   // get transaction and theme context values
     const {transactionArr} = useTransaction()
     const {theme} = useTheme()
 
@@ -18,7 +18,7 @@ export const CashFlowProvider = ({children}) =>{
     const hasIncome = transactionArr.some(t => t.type === "Income");
     const hasExpense = transactionArr.some(t => t.type === "Expense");
 
-   //  CashFlow for the present week
+   //  get cashflow for the present week
    const getThisWeek = useCallback((transactions)=>{
         const obj = {} 
         const start = startOfWeek(new Date())
@@ -40,7 +40,7 @@ export const CashFlowProvider = ({children}) =>{
         return obj 
     },[transactionArr])
 
-   //  CashFlow for the last week
+   //  get cashflow for the last week
     const getLastWeek = useCallback((transactions)=>{
         const obj = {} 
         const lastWeek = subWeeks(new Date(), 1)
@@ -64,7 +64,7 @@ export const CashFlowProvider = ({children}) =>{
     },[transactionArr])
 
 
-   //  CashFlow for the present month
+   //  get cashflow for the present month
    const getThisMonth = useCallback((transactions)=>{
         const obj = {} 
         const start = startOfMonth(new Date())
@@ -87,7 +87,7 @@ export const CashFlowProvider = ({children}) =>{
     },[transactionArr])
     
 
-   //  CashFlow for the last month
+   //  get cashflow for the last month
    const getLastMonth = useCallback((transactions)=>{
         const obj = {} 
         const last = subMonths(new Date(), 1)
@@ -111,7 +111,7 @@ export const CashFlowProvider = ({children}) =>{
     },[transactionArr])
     
 
-    // Get cashflow according to the time period selected
+    // get cashflow according to the time period selected
     const getPeriod = (period, transactions)=>{
       switch (period) {
         case 'this_week':
@@ -131,9 +131,16 @@ export const CashFlowProvider = ({children}) =>{
       }
     }
     
+    // get data for chart
     const groupedObj = getPeriod(period,transactionArr)
     const grouped = Object.keys(groupedObj)
+    const income = grouped.map(date => groupedObj[date]['Income'])
+    const expense = grouped.map(date => groupedObj[date]['Expense'])
+    const totalIncome = income.reduce((acc,curr)=>acc + curr,0)
+    const totalExpense = expense.reduce((acc,curr)=>acc + curr,0)
+    const textColor = theme === "dark" ? "#ffffff" : "#000000";
 
+    // sort grouped dates for proper order in chart
     if (period === "this_week" || period === "last_week") {
      const weekOrder = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     grouped.sort((a,b) => weekOrder.indexOf(a) - weekOrder.indexOf(b)); 
@@ -142,12 +149,7 @@ export const CashFlowProvider = ({children}) =>{
       grouped.sort((a,b) => Number(a.slice(4)) - Number(b.slice(4)));
     }
 
-    const income = grouped.map(date => groupedObj[date]['Income'])
-    const expense = grouped.map(date => groupedObj[date]['Expense'])
-    const totalIncome = income.reduce((acc,curr)=>acc + curr,0)
-    const totalExpense = expense.reduce((acc,curr)=>acc + curr,0)
-    // Theme color for chart
-    const textColor = theme === "dark" ? "#ffffff" : "#000000";
+
 
    const data = {
     labels: grouped,
