@@ -2,44 +2,27 @@ import {FaPlus} from 'react-icons/fa'
 import { useTransaction } from '../../context/TransactionContext';
 import TransactionList from '../TransactionList';
 import { useState, useEffect } from 'react';
-import { useBudget } from '../../context/BudgetContext';
 import {DatePicker} from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import "../../datepicker.css";
-
 
 const Transactions = () => {
    const {
     transaction,setTransaction,chooseType,handleTypeClick,handleAmt,
     selectCategory,handleDesc,addTransaction,transactionArr} = useTransaction()
-    const {budgetArr,setExceededBudgetCount} = useBudget()
    
     const [isAwake,setIsAwake] = useState(false)
 
     useEffect(()=>{
       const handleVisibility = ()=>{
         if (document.visibilityState === 'visible') {
-          setIsAwake(prev => !prev)     
+          setIsAwake(prev => !prev)    
         }
       }
 
       document.addEventListener('visibilitychange',handleVisibility)  
       return ()=>  document.removeEventListener('visibilitychange',handleVisibility)  
     },[])
-
-    useEffect(()=>{
-        if (budgetArr.length > 0) {
-            let count = null
-            budgetArr.forEach(budget =>{
-            let expenses =  transactionArr.filter(item => item.category === budget.category).reduce((acc,curr) => acc + Number(curr.amount),0)
-            if(expenses > budget['amount']) count++
-            })
-            setExceededBudgetCount(count)
-        }else if (budgetArr.length === 0) {
-              setExceededBudgetCount(null)          
-        }
-        
-    },[transactionArr,budgetArr])
 
    return ( <div className=" max-w-5xl mx-auto p-5 rounded-lg bg-white dark:bg-gray-700 shadow-lg" id="transactions">
         <h2  className="font-semibold text-lg mb-4">Transactions</h2>
