@@ -9,7 +9,7 @@ import "../../datepicker.css";
 const Transactions = () => {
    const {
     transaction,setTransaction,chooseType,handleTypeClick,handleAmt,
-    selectCategory,handleDesc,addTransaction,transactionArr} = useTransaction()
+    selectCategory,handleDesc,addTransaction} = useTransaction()
    
     const [isAwake,setIsAwake] = useState(false)
 
