@@ -1,4 +1,4 @@
-import {useRef,useEffect} from 'react'
+import {useEffect} from 'react'
 import { useCashFlow } from '../context/CashFlowContext';
 import { useTransaction } from '../context/TransactionContext';
 import {Bar} from 'react-chartjs-2'
@@ -32,13 +32,15 @@ ChartJS.register(
 );
 
 const CashFlowChart = () => {
-    const {period,setPeriod,getPeriod,hasIncome,hasExpense,data,options} = useCashFlow()
+  // get transaction and cash flow values from cash flow context and transaction context
+    const {period,setPeriod,getPeriod,hasIncome,hasExpense,data,options,selectRef} = useCashFlow()
     const {transactionArr} = useTransaction()
-    const selectRef = useRef()
+  
+  // useEffect to set default period to this_week on component mount
     useEffect(()=>{
-
-        return ()=>{
-            
+      selectRef.current.selectedIndex = 0
+      
+      return ()=>{     
             setPeriod(prev =>{
                 prev = 'this_week'
                 return prev

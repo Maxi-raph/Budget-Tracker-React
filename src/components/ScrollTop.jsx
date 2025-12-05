@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import {useLocation} from 'react-router'
 
 const ScrollTop = () => {
+  // get current pathname using useLocation hook
   const {pathname} = useLocation()
 
   useEffect(()=>{

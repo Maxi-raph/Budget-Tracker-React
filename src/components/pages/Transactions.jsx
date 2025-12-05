@@ -7,12 +7,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../../datepicker.css";
 
 const Transactions = () => {
+   // transaction values and handlers gotten from transaction context
    const {
     transaction,setTransaction,chooseType,handleTypeClick,handleAmt,
     selectCategory,handleDesc,addTransaction} = useTransaction()
-   
+   // internal state
     const [isAwake,setIsAwake] = useState(false)
 
+    // useEffect to handle visibility change of the document to toggle isAwake state
     useEffect(()=>{
       const handleVisibility = ()=>{
         if (document.visibilityState === 'visible') {

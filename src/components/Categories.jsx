@@ -34,10 +34,13 @@ ChartJS.register(
 );
 
 const Categories = () => {
+  //internal state
     const [period,setPeriod] = useState('')
+  // theme and transaction values from their respective contexts
     const {transactionArr} = useTransaction()
     const {theme} = useTheme()
  
+    // function to format large amounts
     const formatAmount = useCallback((value)=>{
           if (value >= 1000000000000) {
            return `$${(value/1000000000000).toFixed(1)}T`
@@ -53,7 +56,7 @@ const Categories = () => {
 
    },[transactionArr])
 
-   //  Categories for the present day
+   //  get categories for the present day
    const getToday = useCallback((transactions)=>{
         const obj = {} 
 
@@ -82,7 +85,7 @@ const Categories = () => {
         return obj 
     },[transactionArr])
 
-   //  Categories for the present week
+   //  get categories for the present week
    const getThisWeek = useCallback((transactions)=>{
         const obj = {} 
         const start = startOfWeek(new Date())
@@ -113,7 +116,7 @@ const Categories = () => {
         return obj 
     },[transactionArr])
 
-   //  Categories for the last week
+   //  get categories for the last week
     const getLastWeek = useCallback((transactions)=>{
         const obj = {} 
         const lastWeek = subWeeks(new Date(), 1)
@@ -146,7 +149,7 @@ const Categories = () => {
     },[transactionArr])
 
 
-   //  Categories for the present month
+   //  get categories for the present month
    const getThisMonth = useCallback((transactions)=>{
         const obj = {} 
         const start = startOfMonth(new Date())
@@ -177,7 +180,7 @@ const Categories = () => {
         return obj 
     },[transactionArr])
      
-   //  Categories for the last month
+   //  get categories for the last month
    const getLastMonth = useCallback((transactions)=>{
         const obj = {} 
         const last = subMonths(new Date(), 1)
@@ -210,7 +213,7 @@ const Categories = () => {
     },[transactionArr])
     
 
-    // Get categories according to the time period selected
+    // get categories according to the time period selected
     const getPeriod = (period, transactions)=>{
       switch (period) {
         case 'today':
@@ -233,6 +236,7 @@ const Categories = () => {
       }
     }
 
+    // get data for the chart
         const categoryColorObj = {
         'Rent':'rgba(255, 137, 0, 1)',    
         'Food':'rgba(34, 197, 0,1)',   
@@ -244,7 +248,6 @@ const Categories = () => {
     const grouped = Object.keys(groupedObj)
     const categories = grouped.map(category => groupedObj[category])   
     const backgroundColors = grouped.map(category => categoryColorObj[category])
-    // Theme color for chart
     const textColor = theme === "dark" ? "#ffffff" : "#000000";
 
     const data = {

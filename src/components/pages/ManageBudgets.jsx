@@ -3,10 +3,12 @@ import { useBudget } from "../../context/BudgetContext"
 import { useTransaction } from "../../context/TransactionContext"
 
 const ManageBudgets = ()=>{
+// budget and transaction values gotten from their respective contexts
   const {budgetArr} = useBudget()
   const {transactionArr,prevCategory} = useTransaction()
   const [isAwake,setIsAwake] = useState(false)
 
+  // useEffect to handle visibility change of the document to toggle isAwake state
  useEffect(()=>{
     const handleVisibility = ()=>{
     if (document.visibilityState === 'visible') {
@@ -18,6 +20,7 @@ const ManageBudgets = ()=>{
     return ()=>  document.removeEventListener('visibilitychange',handleVisibility)  
  },[])
 
+ // function to get expense for a particular category
   const getExpense = (category)=>{
     if (transactionArr.length > 0) {
         const expenseArr = transactionArr.filter(item => item['type'] == 'Expense') 
@@ -28,7 +31,8 @@ const ManageBudgets = ()=>{
     }
     return 0
   }
-
+ 
+  // function to get limit width for budget progress bar
   const getLimitWidth = (amount,category,expense)=>{
        if(amount > 0 && category){ 
         let percent = Number(amount/100)

@@ -5,12 +5,16 @@ import { useBudget } from '../../context/BudgetContext';
 
 
 const SetBudget = () => {
+    // budget values gotten from budget context
     const {budgetArr,setBudgetArr} = useBudget()
+    // internal state
     const [budgetDetails,setBudgetDetails] = useState({category:'',amount:''})
     const [warning,setWarning] = useState(false)
     const [isAwake,setIsAwake] = useState(false)
+    // reference for category select input
     const categorySelectRef = useRef()
 
+    // handlers for form inputs
     const handleCategoryChange = (e)=>{
         setBudgetDetails(prev=>({...prev,[e.target.name]:e.target.value}))
         setWarning(false)
@@ -20,6 +24,7 @@ const SetBudget = () => {
        setBudgetDetails(prev=>({...prev,[e.target.name]:e.target.value}))
     }
 
+    // function to add budget category
     const addCategory = (e)=>{
         e.preventDefault()
         const categoryExists = budgetArr.some(item=>item['category'] == budgetDetails['category'])
@@ -34,6 +39,7 @@ const SetBudget = () => {
         }
     }
 
+    // useEffect to handle visibility change of the document to toggle isAwake state
     useEffect(()=>{
       const handleVisibility = ()=>{
         if (document.visibilityState === 'visible') {

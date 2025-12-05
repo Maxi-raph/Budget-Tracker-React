@@ -5,13 +5,16 @@ import { useEffect,useCallback } from 'react';
 import { useTransaction } from '../context/TransactionContext';
 
 export const Panel  = ()=>{
-
+    //transaction values and handlers gotten from transaction context
   const{transactionArr,totalIncome,totalExpense,activeLink,setActiveLink,isPanelOpen,setIsPanelOpen} = useTransaction()
+
+  // function to close panel on mobile
     const panelClose = (e)=>{
         if(!isPanelOpen)return
         setIsPanelOpen(false)
     } 
     
+    // function to format amount for quick totals
     const formatAmount = useCallback((value)=>{
           if (value >= 1000000000000) {
            return `$${(value/1000000000000).toFixed(1)}T`

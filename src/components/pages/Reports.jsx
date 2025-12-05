@@ -4,6 +4,7 @@ import CashFlow from "../CashFlow";
 
 
 const Reports = () => {
+  //internal state
     const [isAwake,setIsAwake] = useState(false)
     const [activeTab,setActiveTab] = useState({'categories':true,'cashFlow':false,'trends':false})
     
@@ -11,7 +12,7 @@ const Reports = () => {
         setActiveTab(prev =>({'categories':false,'cashFlow':false,'trends':false , [e.target.dataset.name]:true}))
     }
 
-
+  // useEffect to handle visibility change of the document to toggle isAwake state
     useEffect(()=>{
       const handleVisibility = ()=>{
         if (document.visibilityState === 'visible') {

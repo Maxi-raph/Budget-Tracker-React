@@ -4,14 +4,14 @@ import { useBudget } from "../context/BudgetContext";
 import { useTransaction } from "../context/TransactionContext";
 
 const BudgetList = ({setWarning}) => {
-//useContext
+// budget and transaction values and handlers gotten from their respective contexts
 const {transactionArr} = useTransaction()
 const {budgetArr,setBudgetArr,setExceededBudgetCount} = useBudget() 
-// useState
+// internal state
 const [editFlag,setEditFlag] = useState({0:false, 1:false,2:false,3:false,4:false})
 const [categoryToEditValue,setCategoryToEditValue] = useState('')
 
-//Functions
+// function to handle form input
 const handleBudgetChange = (e,index)=>{
     setCategoryToEditValue(prev =>{
         prev = e.target.value
@@ -25,6 +25,7 @@ const handleEdit =(i)=>{
     setCategoryToEditValue(budgetArr[i]['amount'])
 }
 
+ // function to save edited budget amount
 const handleSave =(i)=>{
      setEditFlag(prev=>({...prev, [i]:false}))
      setCategoryToEditValue('')
@@ -39,6 +40,8 @@ const handleSave =(i)=>{
               setExceededBudgetCount(null)          
         }
 }
+
+// function to delete budget category
 const handleDelete = (category)=>{
      let newArr = [...budgetArr]
     newArr = newArr.filter(item =>item['category'] !== category)

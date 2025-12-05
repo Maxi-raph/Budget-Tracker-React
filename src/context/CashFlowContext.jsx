@@ -1,4 +1,4 @@
-import { useContext,useCallback,useState, createContext } from "react";
+import { useContext,useCallback,useState,useRef, createContext } from "react";
 import { useTransaction } from './TransactionContext';
 import {startOfWeek, endOfWeek, subWeeks, format, startOfMonth, endOfMonth, isWithinInterval, subMonths} from "date-fns";
 import { useTheme } from "./ThemeContext";
@@ -6,19 +6,21 @@ import { useTheme } from "./ThemeContext";
 const CashFlowContext = createContext()
 
 export const CashFlowProvider = ({children}) =>{
-   // State
+   // internal state
     const [period,setPeriod] = useState('')
 
-   // Context
+   // get theme and transaction values from their respective contexts
     const {transactionArr} = useTransaction()
     const {theme} = useTheme()
 
+  // ref for select element
+    const selectRef = useRef()
 
    // I checked that the transaction arr contains both expense and income before the chart can be shown
     const hasIncome = transactionArr.some(t => t.type === "Income");
     const hasExpense = transactionArr.some(t => t.type === "Expense");
 
-   //  CashFlow for the present week
+   //  get cashflow for the present week
    const getThisWeek = useCallback((transactions)=>{
         const obj = {} 
         const start = startOfWeek(new Date())
@@ -40,7 +42,7 @@ export const CashFlowProvider = ({children}) =>{
         return obj 
     },[transactionArr])
 
-   //  CashFlow for the last week
+   //  get cashflow for the last week
     const getLastWeek = useCallback((transactions)=>{
         const obj = {} 
         const lastWeek = subWeeks(new Date(), 1)
@@ -64,7 +66,7 @@ export const CashFlowProvider = ({children}) =>{
     },[transactionArr])
 
 
-   //  CashFlow for the present month
+   //  get cashflow for the present month
    const getThisMonth = useCallback((transactions)=>{
         const obj = {} 
         const start = startOfMonth(new Date())
@@ -87,7 +89,7 @@ export const CashFlowProvider = ({children}) =>{
     },[transactionArr])
     
 
-   //  CashFlow for the last month
+   //  get cashflow for the last month
    const getLastMonth = useCallback((transactions)=>{
         const obj = {} 
         const last = subMonths(new Date(), 1)
@@ -111,7 +113,7 @@ export const CashFlowProvider = ({children}) =>{
     },[transactionArr])
     
 
-    // Get cashflow according to the time period selected
+    // get cashflow according to the time period selected
     const getPeriod = (period, transactions)=>{
       switch (period) {
         case 'this_week':
@@ -130,10 +132,11 @@ export const CashFlowProvider = ({children}) =>{
          return getThisWeek(transactions)
       }
     }
-    
+  
+    // get data for cashflow chart
     const groupedObj = getPeriod(period,transactionArr)
     const grouped = Object.keys(groupedObj)
-
+    // sort grouped labels to ensure correct order on chart
     if (period === "this_week" || period === "last_week") {
      const weekOrder = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     grouped.sort((a,b) => weekOrder.indexOf(a) - weekOrder.indexOf(b)); 
@@ -146,7 +149,6 @@ export const CashFlowProvider = ({children}) =>{
     const expense = grouped.map(date => groupedObj[date]['Expense'])
     const totalIncome = income.reduce((acc,curr)=>acc + curr,0)
     const totalExpense = expense.reduce((acc,curr)=>acc + curr,0)
-    // Theme color for chart
     const textColor = theme === "dark" ? "#ffffff" : "#000000";
 
    const data = {
@@ -234,7 +236,7 @@ export const CashFlowProvider = ({children}) =>{
 
 
     return(
-        <CashFlowContext.Provider value={{hasIncome,hasExpense,data,options,totalIncome,totalExpense,period,setPeriod,getPeriod}}>
+        <CashFlowContext.Provider value={{hasIncome,hasExpense,data,options,totalIncome,totalExpense,period,setPeriod,getPeriod,selectRef}}>
             {children}
         </CashFlowContext.Provider>
     )

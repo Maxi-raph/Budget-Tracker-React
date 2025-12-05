@@ -10,12 +10,15 @@ import { format } from "date-fns";
 import FilteredList from "./FilteredList";
 
 const NavBar = () => {
+  //budget, transaction and theme values and handlers gotten from their respective contexts
     const {exceededBudgetCount} = useBudget()
     const {isPanelOpen,setIsPanelOpen,transactionArr} = useTransaction()
     const {toggleTheme,theme} = useTheme()
+    // internal state
     const [isToolTip,setIsToolTip] =useState({'input':false, 'manageBudget':false})
     const [searchInput,setSearchInput] = useState('')
 
+    // function to show tooltip
     const showToolTip = (e)=>{
       const name = e.currentTarget?.dataset?.name
       if(!name) return
@@ -24,11 +27,13 @@ const NavBar = () => {
     setTimeout(hideToolTip, 1500);
     } 
 
+    // function to hide tooltip
     const hideToolTip = ()=> setIsToolTip(prev => ({'input':false, 'manageBudget':false}))
     const handleSearch = (e)=>{
       setSearchInput(e.target.value)
     }
 
+    // filter transactions by date based on search input
     const filterByTransactionDate = transactionArr.filter(item => searchInput.trim() && format(item.date, 'MMM dd').toLowerCase().includes(searchInput.toLowerCase())).sort((a,b)=> format(a.date, 'MMM dd').slice(4) - format(b.date, 'MMM dd').slice(4))
 
     return ( <div className="flex justify-between gap-3 shadow-sm items-center p-3  w-full fixed z-20 top-0 left-0 sm:pl-0 md:pl-64 lg:pl-64 bg-gray-100/30 dark:bg-gray-900/30 backdrop-blur-xs">

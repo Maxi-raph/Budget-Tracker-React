@@ -6,7 +6,7 @@ const TransactionContext  = createContext()
 
 export const TransactionProvider = ({children})=>{
 
-    //States
+    //internal state
  const [chooseType,setChooseType]  = useState(false)
  const [transaction, setTransaction] = useState({description: "", amount: '', type: "Expense", category: '' ,date: ''})
  const [transactionArr, setTransactionArr] = useState([])
@@ -18,7 +18,7 @@ export const TransactionProvider = ({children})=>{
  const [isPanelOpen,setIsPanelOpen] = useState(false) 
  const [prevCategory,setPrevCategory] = useState(null)
 
-  //Functions
+  //handler functions for form inputs
  const handleTypeClick =(e)=>{
     setTransaction(prev => ({
       ...prev, 
@@ -39,6 +39,8 @@ export const TransactionProvider = ({children})=>{
  const handleAmt =(e)=>  setTransaction(prev=>({...prev,['amount']:e.target.value}))
  const selectCategory = (e)=>  setTransaction(prev=>({...prev,['category']:e.target.value}))
  const handleDesc =  (e)=>  setTransaction(prev=>({...prev,['description']:e.target.value}))
+
+ // function to add a new transaction
  const addTransaction = useCallback((e) => {
   e.preventDefault()
   const newObj = { ...transaction };
@@ -66,7 +68,7 @@ export const TransactionProvider = ({children})=>{
   }
 }, [transaction]);
 
-    //useEffect
+    // useEffect to update total income, total expense, largest expense category, and recurring bills whenever transactionArr changes
     useEffect(()=>{
         setTotalIncome(transactionArr.filter(item =>item['type'] == 'Income').reduce((acc,curr)=> acc +  parseInt(curr['amount']),0))
         setTotalExpense(transactionArr.filter(item =>item['type'] == 'Expense').reduce((acc,curr)=> acc + parseInt(curr['amount']),0))  

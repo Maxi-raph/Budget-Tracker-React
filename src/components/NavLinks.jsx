@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 
 const NavLinks = ({name,icon,id, setIsPanelOpen,activeLink,setActiveLink}) => {
+  // determine link path based on id
   const linkPath = id === 'dashboard' ? '/' : `/${id}`;
 
     return ( <>

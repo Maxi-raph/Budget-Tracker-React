@@ -7,15 +7,17 @@ import CashFlowChart from "../CashFlowChart";
 
 
 const Dashboard = () => {
+  // transaction and budget values gotten from their respective contexts
     const{totalIncome,totalExpense,largestCategory,recurringBills,transactionArr,prevCategory,setPrevCategory} = useTransaction()
     const {budgetArr,setExceededBudgetCount} = useBudget()
     const [limitWidth,setLimitWidth] = useState(0)
     const [isAwake,setIsAwake] = useState(false)
 
+    // i calculated expense and got the budgetCategory for the previous expense category selected by the user so that i can show budget progress
    const expense =   useMemo(()=>transactionArr.filter(item=>item['type'] == 'Expense').filter(item=>item['category'] == prevCategory).reduce((acc,curr) =>acc + parseInt(curr['amount']), 0),[prevCategory])
    const budgetCategory= useMemo(()=>budgetArr.filter(item=>item['category'] == prevCategory),[prevCategory])
    
-
+ //useEffect to set limit width of budget progress bar
     useEffect(()=>{
      setLimitWidth(() =>{
        if(budgetCategory.length == 1 && expense){ 
@@ -30,7 +32,7 @@ const Dashboard = () => {
      })
   
     },[expense,transactionArr])
-
+    // useEffect to handle visibility change of the document to toggle isAwake state
     useEffect(()=>{
       const handleVisibility = ()=>{
         if (document.visibilityState === 'visible') {
