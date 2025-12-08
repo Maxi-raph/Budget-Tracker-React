@@ -30,7 +30,7 @@ const handleSave =(i)=>{
      setEditFlag(prev=>({...prev, [i]:false}))
      setCategoryToEditValue('')
         if (budgetArr.length > 0) {
-            let count = null
+            let count = 0
             budgetArr.forEach(budget =>{
             let expenses =  transactionArr.filter(item => item.category === budget.category).reduce((acc,curr) => acc + Number(curr.amount),0)
             if(expenses > budget['amount']) count++

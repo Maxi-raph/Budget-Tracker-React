@@ -38,9 +38,9 @@ const TransactionList = () => {
             let updatedArr = ''
             updatedArr = transactionArr.map((item,i) =>  i === index ? updatedTransaction :item) 
             setPrevCategory(prev => updatedTransaction['type']  == 'Expense' && updatedTransaction['category'])
-            setTransactionArr(updatedArr) 
+            setTransactionArr(prev => updatedArr) 
             setIndex(null)
-            setIsModalOpen(prev => prev = false)
+            setIsModalOpen(prev =>  false)
     }
     //
     const handleDelete = (e)=>{

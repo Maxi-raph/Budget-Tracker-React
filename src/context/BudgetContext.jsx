@@ -23,7 +23,7 @@ export const BudgetProvider = ({children})=>{
             let count = 0
             budgetArr.forEach(item =>{
             let expenses =  transactionArr.filter(tx => tx.category === item.category).reduce((acc,curr) => acc + Number(curr.amount),0)
-            if(expenses > budget['amount']) count++
+            if(expenses > item['amount']) count++
             })
             setExceededBudgetCount(count)
         }else if (budgetArr.length === 0) {
