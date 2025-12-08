@@ -47,6 +47,7 @@ const handleDelete = (category)=>{
     newArr = newArr.filter(item =>item['category'] !== category)
     setBudgetArr(prev=>prev = newArr)
     setWarning(false)
+    setEditFlag({0:false, 1:false,2:false,3:false,4:false})
 }
 
 

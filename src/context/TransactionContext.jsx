@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext, createContext, useEffect } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 
 
 const TransactionContext  = createContext()
@@ -41,7 +41,7 @@ export const TransactionProvider = ({children})=>{
  const handleDesc =  (e)=>  setTransaction(prev=>({...prev,['description']:e.target.value}))
 
  // function to add a new transaction
- const addTransaction = useCallback((e) => {
+ const addTransaction = (e) => {
   e.preventDefault()
   const newObj = { ...transaction };
   let valid = true;
@@ -66,7 +66,7 @@ export const TransactionProvider = ({children})=>{
     }));
  
   }
-}, [transaction]);
+}
 
     // useEffect to update total income, total expense, largest expense category, and recurring bills whenever transactionArr changes
     useEffect(()=>{
