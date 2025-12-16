@@ -6,7 +6,7 @@ import { useTransaction } from '../context/TransactionContext';
 
 export const Panel  = ()=>{
     //transaction values and handlers gotten from transaction context
-  const{transactionArr,totalIncome,totalExpense,activeLink,setActiveLink,isPanelOpen,setIsPanelOpen} = useTransaction()
+  const{transactionArr,totalIncome,totalExpense,isPanelOpen,setIsPanelOpen} = useTransaction()
 
   // function to close panel on mobile
     const panelClose = (e)=>{
@@ -41,9 +41,9 @@ export const Panel  = ()=>{
                 <FaWallet className='text-gray-800 dark:text-white text-md sm:text-xl'/> 
                 <header className="text-xl font-semibold">Budgetly</header>
             </div>
-            <NavLinks name={'Dashboard'} icon={<FaTachometerAlt className=' text-md'/>} id={'dashboard'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
-            <NavLinks name={'Transactions'} icon={<FaExchangeAlt className=' text-md'/>} id={'transactions'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
-            <NavLinks name={'Reports'} icon={<FaChartLine className=' text-md'/>} id={'reports'} setIsPanelOpen={setIsPanelOpen} activeLink={activeLink} setActiveLink={setActiveLink}/>
+            <NavLinks name={'Dashboard'} icon={<FaTachometerAlt className=' text-md'/>} id={'dashboard'} setIsPanelOpen={setIsPanelOpen}/>
+            <NavLinks name={'Transactions'} icon={<FaExchangeAlt className=' text-md'/>} id={'transactions'} setIsPanelOpen={setIsPanelOpen}/>
+            <NavLinks name={'Reports'} icon={<FaChartLine className=' text-md'/>} id={'reports'} setIsPanelOpen={setIsPanelOpen}/>
 
             <div className='bg-gray-200 rounded-lg p-2 mt-6 shadow-lg block dark:bg-gray-800'>
                 <h2 className='text-gray-600 font-medium mb-3 dark:text-white'>Quick Totals</h2>
