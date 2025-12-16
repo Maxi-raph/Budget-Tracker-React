@@ -1,5 +1,6 @@
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 import Transactions from './pages/Transactions';
 import SetBudget from "./pages/SetBudget";
 import ManageBudgets from "./pages/ManageBudgets";
@@ -15,6 +16,7 @@ const BudgetDashboard = () => {
             <Route path="/set_budget" element={<SetBudget />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path='/manage_budgets' element={<ManageBudgets />}/>
         </Routes>
     </div> );
