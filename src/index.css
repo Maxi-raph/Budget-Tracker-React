@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+/* Custom Dark Mode Variant */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply bg-gray-200 text-black;
+  }
+
+  .dark body {
+    @apply bg-gray-800 text-white;
+  }
+}   
